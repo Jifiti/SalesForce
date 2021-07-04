@@ -1,0 +1,11 @@
+<!--- applicable credit cards--->
+<div class="tab-pane cred-payment-content" id="cred-payment-content" role="tabpanel">
+    <fieldset class="payment-form-fields">
+
+        <input type="hidden" class="form-control"
+               name="${pdict.forms.billingForm.paymentMethod.htmlName}"
+               value="CRED_PAYMENT"
+        >
+    </fieldset>
+    <p>${paymentOption.description}</p>
+</div>
