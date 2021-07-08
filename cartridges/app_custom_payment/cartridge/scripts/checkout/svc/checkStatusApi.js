@@ -1,3 +1,5 @@
+/* eslint-disable  no-param-reassign */
+
 'use strict';
 
 var LocalServiceRegistry = require('dw/svc/LocalServiceRegistry');

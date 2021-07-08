@@ -1,5 +1,4 @@
 'use strict';
-var base = module.superModule;
 
 var Transaction = require('dw/system/Transaction');
 var PaymentMgr = require('dw/order/PaymentMgr');
@@ -60,6 +59,8 @@ function handlePayments(order, orderNumber) {
                         break;
                     } else if (authorizationResult.credPaymentRedirectUrl) {
                         result.credPaymentRedirectUrl = authorizationResult.credPaymentRedirectUrl;
+                        result.callBackURL = authorizationResult.callBackURL;
+                        result.orderNo = authorizationResult.orderNo;
                     }
                 }
             }
@@ -69,6 +70,6 @@ function handlePayments(order, orderNumber) {
     return result;
 }
 
-
-base.handlePayments = handlePayments;
-module.exports = base;
+module.exports = exports = {
+    handlePayments: handlePayments
+};

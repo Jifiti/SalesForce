@@ -1,3 +1,4 @@
+/* eslint-disable  consistent-return */
 'use strict';
 
 var server = require('server');
@@ -12,6 +13,7 @@ server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) 
     var basketCalculationHelpers = require('*/cartridge/scripts/helpers/basketCalculationHelpers');
     var hooksHelper = require('*/cartridge/scripts/helpers/hooks');
     var COHelpers = require('*/cartridge/scripts/checkout/checkoutHelpers');
+    var credPaymentHelper = require('*/cartridge/scripts/checkout/credPaymentHelper');
     var validationHelpers = require('*/cartridge/scripts/helpers/basketValidationHelpers');
     var Site = require('dw/system/Site');
     var collections = require('*/cartridge/scripts/util/collections');
@@ -148,7 +150,7 @@ server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) 
     }
 
     // Handles payment authorization
-    var handlePaymentResult = COHelpers.handlePayments(order, order.orderNo);
+    var handlePaymentResult = credPaymentHelper.handlePayments(order, order.orderNo);
     if (handlePaymentResult.error) {
         res.json({
             error: true,
@@ -178,11 +180,14 @@ server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) 
         return;
     }
     if (handlePaymentResult.credPaymentRedirectUrl) {
-        var windowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value
+        var windowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value;
+
         res.json({
             error: false,
             credPaymentUrl: handlePaymentResult.credPaymentRedirectUrl,
-            windowBehavior: windowBehavior
+            windowBehavior: windowBehavior,
+            callBackUrl: handlePaymentResult.callBackURL,
+            orderNo: handlePaymentResult.orderNo
         });
         this.emit('route:Complete', req, res);
         return;

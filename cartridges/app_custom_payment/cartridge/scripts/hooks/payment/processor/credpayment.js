@@ -24,6 +24,11 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
     var currentBasket = basket;
     var cardErrors = {};
     var serverErrors = [];
+    var paymentProcessor;
+    var credPayment = PaymentMgr.getPaymentMethod('CRED_PAYMENT');
+    if (credPayment) {
+        paymentProcessor = credPayment.paymentProcessor;
+    }
     Transaction.wrap(function () {
         var allPaymentInstruments = currentBasket.getPaymentInstruments();
         collections.forEach(allPaymentInstruments, function (item) {
@@ -37,6 +42,7 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
         var paymentInstrument = currentBasket.createPaymentInstrument(
             paymentMethodID, currentBasket.totalGrossPrice
         );
+        paymentInstrument.paymentTransaction.paymentProcessor = paymentProcessor;
     });
 
     return {
@@ -94,7 +100,9 @@ function Authorize(orderNumber, paymentInstrument, paymentProcessor) {
     return {
         errorMessages: errorMessages,
         error: error,
-        credPaymentRedirectUrl: credPaymentRedirectUrl
+        credPaymentRedirectUrl: credPaymentRedirectUrl,
+        callBackURL: paymentRequest.CallbackURL,
+        orderNo: paymentRequest.OrderId
     };
 }
 

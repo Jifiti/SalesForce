@@ -362,10 +362,24 @@ var scrollAnimate = require('base/components/scrollAnimate');
                             } else {
                                 if (data.credPaymentUrl) {
                                     if (data.windowBehavior === 'NewTab') {
+                                        $('body').trigger('checkout:disableButton', '.next-step-button button');
                                         window.open(data.credPaymentUrl, '_blank');
                                     }
                                     if (data.windowBehavior === 'SameTab') {
                                         window.location = data.credPaymentUrl;
+                                    }
+                                    if (data.windowBehavior === 'Lightbox') {
+                                        var callBackUrl = data.callBackUrl;
+                                        var orderNo = data.orderNo;
+                                        $( '.payment-modal .close').data('url', orderNo);
+                                        window.addEventListener('message', function(e) {
+                                            if(e.data === "closeIframe") {
+                                                $('#paymentModal').modal('hide');
+                                                window.top.location.href =callBackUrl
+                                            }
+                                        }, false);
+                                        $('#paymentModal').modal('show');
+                                        $('#paymentModal iframe').attr("src",  data.credPaymentUrl);
                                     }
                                 } else {
                                     var redirect = $('<form>')
@@ -437,6 +451,17 @@ var scrollAnimate = require('base/components/scrollAnimate');
                     $('.credit-card-form').toggle($(this).val() === 'CREDIT_CARD');
                 });
 
+                var urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.get('payemntError')) {
+                    if (!urlParams.get('closeIframe')) {
+                        if (urlParams.get('windowBehavior') === 'Lightbox') {
+                            $('#paymentError').modal('show');
+                        } else {
+                            $('.error-message').show();
+                            $('.error-message-text').text('We encountred a problem with your application.Please choose another payment method');
+                        }
+                    }
+                }
                 //
                 // Handle Next State button click
                 //
@@ -623,6 +648,25 @@ var exports = {
     enableButton: function () {
         $('body').on('checkout:enableButton', function (e, button) {
             $(button).prop('disabled', false);
+        });
+    },
+
+    closeIframe: function () {
+        $('body').on('click', '.payment-modal .close', function (e) {
+            $.ajax({
+                url: $('.payment-modal .close').data('failorder'),
+                method: 'POST',
+                data: { orderNo:$('.payment-modal .close').data('url') },
+                success: function (data) {
+                    if (!data.error) {
+                        window.location.href = data.url;
+                    }
+                },
+                error: function (data) {
+                    // enable the placeOrder button here
+                    $('body').trigger('checkout:enableButton', $('.next-step-button button'));
+                }
+            });
         });
     }
 

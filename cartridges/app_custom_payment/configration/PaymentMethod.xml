@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<payment-settings xmlns="http://www.demandware.com/xml/impex/paymentsettings/2009-09-15">
+    <payment-method method-id="CRED_PAYMENT">
+        <name xml:lang="x-default">CRED PAYMENT</name>
+        <description xml:lang="x-default">Click Place Order And Start Your Application.
+Once You Complete the Application Process you will be redirect to order confirmation page and receive a confirmation email.
+No need to do anything further.Your order will be processed and sent to you!</description>
+        <enabled-flag>true</enabled-flag>
+        <processor-id>CRED_PAYMENT</processor-id>
+    </payment-method>
+</payment-settings>

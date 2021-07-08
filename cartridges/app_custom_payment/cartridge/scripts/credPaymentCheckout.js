@@ -1,3 +1,5 @@
+/* eslint-disable  no-undef */
+/* eslint-disable  no-param-reassign */
 'use strict';
 
 /**
@@ -38,7 +40,7 @@ function getPaymentRequest(order, paymentInstrument) {
         customerdetail.Last4SSN = null;
     } else {
         customerdetail.FirstName = billingAddress.firstName ? billingAddress.firstName : '';
-        customerdetail.LastName =  billingAddress.lastName ? billingAddress.lastName : '';
+        customerdetail.LastName = billingAddress.lastName ? billingAddress.lastName : '';
         customerdetail.Email = customerEmail;
         customerdetail.MobilePhoneNumber = billingAddress.phone ? billingAddress.phone : '';
         customerdetail.DateOfBirth = null;
@@ -68,7 +70,7 @@ function getPaymentRequest(order, paymentInstrument) {
     paymentReq.BillingAddress = billingAddressDetail;
     paymentReq.ShippingAddress = shippingAddressDetail;
     var customerLoyaltyDetail = {};
-    customerLoyaltyDetail.LoyaltyNumber = customer.authenticated && customer.registered ? customer.profile.customerNo :'';
+    customerLoyaltyDetail.LoyaltyNumber = customer.authenticated && customer.registered ? customer.profile.customerNo : '';
     customerLoyaltyDetail.LoyaltyStartDate = '';
     customerLoyaltyDetail.LoyaltyType = '';
     customerLoyaltyDetail.LoyaltyClassification = '';
@@ -92,11 +94,11 @@ function getPaymentRequest(order, paymentInstrument) {
         var productDetail = {};
         productDetail.Name = order.allProductLineItems[i].productName;
         productDetail.SKU = order.allProductLineItems[i].productID;
-        productDetail.Quantity =  order.allProductLineItems[i].quantity.value;
-        productDetail.Price =  order.allProductLineItems[i].price.value;
+        productDetail.Quantity = order.allProductLineItems[i].quantity.value;
+        productDetail.Price = order.allProductLineItems[i].price.value;
         productDetail.Currency = order.allProductLineItems[i].grossPrice.currencyCode;
         productDetail.ImageURL = '';
-        productDetail.Eligible = "true";
+        productDetail.Eligible = 'true';
         productDetail.OfferCategory = '';
         productDetail.SalesTax = order.allProductLineItems[i].adjustedTax.value;
         productDetail.Fees = 0.0;
