@@ -24,9 +24,18 @@
             <preference preference-id="sourcePageType">Checkout</preference>
             <preference preference-id="storeId">Tel Aviv</preference>
             <preference preference-id="windowBehavior">SameTab</preference>
+            <preference preference-id="paymentTransactionType">Capture</preference>
+            <preference preference-id="credPaymentDescription">&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+
+                &lt;div style="direction: ltr;"&gt;Click 'Place Order' and start your application.&lt;/div&gt;
+
+                &lt;div style="direction: ltr;"&gt;&amp;nbsp;&lt;/div&gt;
+
+                &lt;div style="direction: ltr;"&gt;Once you complete the application process you will be redirect to order confirmation page and receive a confirmation email.&lt;br /&gt;
+                No need to do anything further. your order will be processed and sent to you!&lt;/div&gt;
+            </preference>
         </development>
         <staging/>
         <production/>
     </custom-preferences>
 </preferences>
-

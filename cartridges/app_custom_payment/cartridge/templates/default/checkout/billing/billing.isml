@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/modal.css')}" />
 <div class="card ghost payment">
     <div class="card-header">
         <h2 class="card-header-custom">${Resource.msg('heading.payment', 'checkout', null)}</h2>
@@ -85,11 +86,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade payment-modal" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade payment-modal" id="paymentModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document" style="max-width:1000px;">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close" data-url="" data-failorder="${URLUtils.url('CredPaymentController-HandleClose')}">
+        <button type="button" class="close " data-dismiss="modal" aria-label="Close" data-orderno="" data-failorder="${URLUtils.url('CredPaymentController-HandleCloseIframe')}" data-errormessage="${Resource.msg('msg.credpayment.error', 'credPayment', null)}">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -100,18 +101,18 @@
   </div>
 </div>
 
-<div class="modal fade" id="paymentError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade payment-error" id="paymentError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered text-center" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header border-0 pb-0">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p class="font-weight-bold">We encountred a problem with your application</p>
+        <div class="font-weight-bold mb-2">We encountred a problem with your application</div>
         <p>Please choose another payment method</p>
-        <button type="button" class="btn btn-secondary px-5 bg-dark" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-secondary px-5" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>

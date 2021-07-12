@@ -6,6 +6,9 @@
 var server = require('server');
 var csrfProtection = require('*/cartridge/scripts/middleware/csrf');
 var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
+var Resource = require('dw/web/Resource');
+var URLUtils = require('dw/web/URLUtils');
+var csrfProtection = require('*/cartridge/scripts/middleware/csrf');
 // eslint-disable-next-line consistent-return
 server.get(
     'Confirm',

@@ -142,6 +142,28 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
+            <attribute-definition attribute-id="credPaymentDescription">
+                <display-name xml:lang="x-default">credPaymentDescription</display-name>
+                <type>html</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="paymentTransactionType">
+                <display-name xml:lang="x-default">Payment Transaction Type</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Auth</display>
+                        <value>Auth</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Capture</display>
+                        <value>Capture</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="CredPayment">
@@ -156,6 +178,8 @@
                 <attribute attribute-id="SourceChannel"/>
                 <attribute attribute-id="CompletionMethod"/>
                 <attribute attribute-id="windowBehavior"/>
+                <attribute attribute-id="paymentTransactionType"/>
+                <attribute attribute-id="credPaymentDescription"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

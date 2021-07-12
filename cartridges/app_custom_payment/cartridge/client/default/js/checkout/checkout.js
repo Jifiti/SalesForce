@@ -371,15 +371,15 @@ var scrollAnimate = require('base/components/scrollAnimate');
                                     if (data.windowBehavior === 'Lightbox') {
                                         var callBackUrl = data.callBackUrl;
                                         var orderNo = data.orderNo;
-                                        $( '.payment-modal .close').data('url', orderNo);
+                                        $('.payment-modal .close').data('orderno', orderNo);
                                         window.addEventListener('message', function(e) {
                                             if(e.data === "closeIframe") {
                                                 $('#paymentModal').modal('hide');
-                                                window.top.location.href =callBackUrl
+                                                window.top.location.href = callBackUrl;
                                             }
                                         }, false);
                                         $('#paymentModal').modal('show');
-                                        $('#paymentModal iframe').attr("src",  data.credPaymentUrl);
+                                        $('#paymentModal iframe').attr('src', data.credPaymentUrl);
                                     }
                                 } else {
                                     var redirect = $('<form>')
@@ -458,7 +458,8 @@ var scrollAnimate = require('base/components/scrollAnimate');
                             $('#paymentError').modal('show');
                         } else {
                             $('.error-message').show();
-                            $('.error-message-text').text('We encountred a problem with your application.Please choose another payment method');
+                            var errorMessage = $('.payment-modal .close').data('errormessage');
+                            $('.error-message-text').text(errorMessage);
                         }
                     }
                 }
@@ -656,7 +657,7 @@ var exports = {
             $.ajax({
                 url: $('.payment-modal .close').data('failorder'),
                 method: 'POST',
-                data: { orderNo:$('.payment-modal .close').data('url') },
+                data: { orderNo: $('.payment-modal .close').data('orderno') },
                 success: function (data) {
                     if (!data.error) {
                         window.location.href = data.url;

@@ -45,7 +45,11 @@ server.get('CallBack', function (req, res, next) {
                 svc = credPaymentService.credPaymentSendPaymentRequest();
                 params = {};
                 params.paymentRequest = authRequest;
-                params.URL = 'purchases/v2/Authorize?InstantCommit=true';
+                if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
+                    params.URL = 'purchases/v2/Authorize?InstantCommit=true';
+                } else {
+                    params.URL = 'purchases/v2/Authorize?InstantCommit=false';
+                }
                 result1 = svc.call(params);
             } else {
                 success = false;
@@ -73,12 +77,16 @@ server.get('CallBack', function (req, res, next) {
             req.session.privacyCache.set('usingMultiShipping', false);
             if (!placeOrderResult.error) {
                 Transaction.wrap(function () {
-                    order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
                     var paymentInstruments = order.paymentInstruments;
                     for (var i = 0; i < paymentInstruments.length; i++) {
                         if (paymentInstruments[i].paymentMethod === 'CRED_PAYMENT') {
                             paymentInstruments[i].paymentTransaction.setTransactionID(res1.AuthId);
-                            paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_CAPTURE);
+                            if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
+                                paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_CAPTURE);
+                                order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
+                            } else {
+                                paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_AUTH);
+                            }
                             paymentInstruments[i].custom.credPaymentResponse = result1.object.text;
                         }
                     }
@@ -97,7 +105,7 @@ server.get('CallBack', function (req, res, next) {
     }
     next();
 });
-server.post('HandleClose', server.middleware.https, function (req, res, next) {
+server.post('HandleCloseIframe', server.middleware.https, function (req, res, next) {
     var URLUtils = require('dw/web/URLUtils');
     var Transaction = require('dw/system/Transaction');
     var OrderMgr = require('dw/order/OrderMgr');

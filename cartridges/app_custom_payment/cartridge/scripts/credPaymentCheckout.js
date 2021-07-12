@@ -83,27 +83,47 @@ function getPaymentRequest(order, paymentInstrument) {
     paymentReq.SourcePageType = Site.current.getCustomPreferenceValue('sourcePageType').value;
     paymentReq.CallbackURL = callBackURL;
     paymentReq.NotificationAPIURL = '';
-    var productTypes1 = Site.current.getCustomPreferenceValue('productTypes');
-    var productTypesList = new dw.util.ArrayList(productTypes1);
+    var productTypesValues = Site.current.getCustomPreferenceValue('productTypes');
+    var productTypesList = new dw.util.ArrayList(productTypesValues);
     var productTypes = productTypesList.toArray();
     paymentReq.AllowedProductTypes = productTypes;
     paymentReq.ClientCustomData1 = '';
     paymentReq.ClientCustomData2 = '';
     var itemsDetails = [];
+    var fees = 0;
     for (var i = 0; i < order.allProductLineItems.length; i++) {
         var productDetail = {};
         productDetail.Name = order.allProductLineItems[i].productName;
         productDetail.SKU = order.allProductLineItems[i].productID;
+        var productShippingLintItem = order.allProductLineItems[i].getShippingLineItem();
+        if (productShippingLintItem !== null) {
+            fees = productShippingLintItem ? productShippingLintItem.adjustedGrossPrice.value : 0.0;
+        }
         productDetail.Quantity = order.allProductLineItems[i].quantity.value;
-        productDetail.Price = order.allProductLineItems[i].price.value;
+        productDetail.Price = order.allProductLineItems[i].adjustedNetPrice.value;
         productDetail.Currency = order.allProductLineItems[i].grossPrice.currencyCode;
         productDetail.ImageURL = '';
         productDetail.Eligible = 'true';
         productDetail.OfferCategory = '';
         productDetail.SalesTax = order.allProductLineItems[i].adjustedTax.value;
-        productDetail.Fees = 0.0;
-        productDetail.TotalCost = order.allProductLineItems[i].grossPrice.value;
+        productDetail.Fees = fees;
+        productDetail.TotalCost = order.allProductLineItems[i].grossPrice.value + fees;
         itemsDetails.push(productDetail);
+    }
+    for (var ind = 0; ind < order.defaultShipment.shippingLineItems.length; ind++) {
+        var shippingDetail = {};
+        shippingDetail.Name = order.defaultShipment.shippingLineItems[0].lineItemText;
+        shippingDetail.SKU = order.defaultShipment.shippingLineItems[0].ID;
+        shippingDetail.Quantity = 1;
+        shippingDetail.Price = order.defaultShipment.shippingLineItems[ind].adjustedNetPrice.value;
+        shippingDetail.Currency = order.defaultShipment.shippingLineItems[ind].grossPrice.currencyCode;
+        shippingDetail.ImageURL = '';
+        shippingDetail.Eligible = 'true';
+        shippingDetail.OfferCategory = '';
+        shippingDetail.SalesTax = order.defaultShipment.shippingLineItems[ind].adjustedTax.value;
+        shippingDetail.Fees = 0.0;
+        shippingDetail.TotalCost = order.defaultShipment.shippingLineItems[ind].grossPrice.value;
+        itemsDetails.push(shippingDetail);
     }
     paymentReq.Items = itemsDetails;
     paymentReq.SourceChannel = Site.current.getCustomPreferenceValue('SourceChannel').value;
