@@ -195,7 +195,9 @@ function updatePaymentInformation(order) {
             + order.billing.payment.selectedPaymentInstruments[0].expirationMonth
             + '/' + order.billing.payment.selectedPaymentInstruments[0].expirationYear
             + '</span></div>';
-    } else {
+    }
+    if (order.billing.payment && order.billing.payment.selectedPaymentInstruments
+        && order.billing.payment.selectedPaymentInstruments.length > 0 && order.billing.payment.selectedPaymentInstruments[0].paymentMethod === 'CRED_PAYMENT') {
         htmlToAppend += '<span>' + order.billing.payment.selectedPaymentInstruments[0].paymentMethod + '</span>';
     }
 
