@@ -5,7 +5,7 @@
         <development>
             <preference preference-id="CompletionMethod">TransferCard</preference>
             <preference preference-id="SourceChannel">Online</preference>
-            <preference preference-id="callBackURL">https://zyaf-001.sandbox.us01.dx.commercecloud.salesforce.com/on/demandware.store/Sites-RefArch-Site/en_US/CredPaymentController-CallBack/?orderID=</preference>
+            <preference preference-id="callBackURL">https://zyaf-001.sandbox.us01.dx.commercecloud.salesforce.com/on/demandware.store/Sites-RefArch-Site/en_US/CredPaymentController-CallBack</preference>
             <preference preference-id="credPaymentToken">9394144a255d43d9aa1f6d199a4d0109</preference>
             <preference preference-id="lenderId">vxm8wxono74ewf9ulbltovn7swk5n4to</preference>
             <preference preference-id="merchantId">5596f4af2d594237a5ff7c946a797fc7</preference>

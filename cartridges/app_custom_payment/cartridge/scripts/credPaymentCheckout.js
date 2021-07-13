@@ -23,7 +23,7 @@ function getPaymentRequest(order, paymentInstrument) {
     Transaction.wrap(function () {
         order.custom.token = token;
     });
-    var callBackURL = Site.current.getCustomPreferenceValue('callBackURL') + orderNo + '&&token=' + token;
+    var callBackURL = Site.current.getCustomPreferenceValue('callBackURL') + '/?orderID=' + orderNo + '&&token=' + token;
     var customerEmail = order.getCustomerEmail();
     var customerdetail = {};
     var billingAddressDetail = {};

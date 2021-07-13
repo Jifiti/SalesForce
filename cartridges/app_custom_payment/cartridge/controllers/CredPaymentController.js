@@ -44,7 +44,6 @@ server.get('CallBack', function (req, res, next) {
                 var credPaymentService = require('*/cartridge/scripts/checkout/svc/credPaymentApi');
                 svc = credPaymentService.credPaymentSendPaymentRequest();
                 params = {};
-                params.paymentRequest = authRequest;
                 if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
                     params.URL = 'purchases/v2/Authorize';
                     authRequest.InstantCommit = true;
@@ -52,6 +51,7 @@ server.get('CallBack', function (req, res, next) {
                     params.URL = 'purchases/v2/Authorize';
                     authRequest.InstantCommit = false;
                 }
+                params.paymentRequest = authRequest;
                 purchaseApiResult = svc.call(params);
             } else {
                 paymentError = true;
