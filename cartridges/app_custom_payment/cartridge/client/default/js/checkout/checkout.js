@@ -452,7 +452,7 @@ var scrollAnimate = require('base/components/scrollAnimate');
                 });
 
                 var urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.get('payemntError')) {
+                if (urlParams.get('paymentError')) {
                     if (!urlParams.get('closeIframe')) {
                         if (urlParams.get('windowBehavior') === 'Lightbox') {
                             $('#paymentError').modal('show');

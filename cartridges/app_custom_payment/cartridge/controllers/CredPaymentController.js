@@ -15,10 +15,10 @@ server.get('CallBack', function (req, res, next) {
     var Transaction = require('dw/system/Transaction');
     var BasketMgr = require('dw/order/BasketMgr');
     // var Resource = require('dw/web/Resource');
-    // var Logger = require('dw/system/Logger');
+    var Logger = require('dw/system/Logger');
     var checkStatusService = require('*/cartridge/scripts/checkout/svc/checkStatusApi');
-    var success = false;
-    var result1;
+    var paymentError = true;
+    var purchaseApiResult;
     var order = OrderMgr.getOrder(request.httpParameterMap.orderID);
     var token = request.httpParameterMap.token.stringValue;
     var windowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value;
@@ -37,7 +37,7 @@ server.get('CallBack', function (req, res, next) {
                 authRequest.Currency = order.getCurrencyCode();
                 var issueCards = resultObj.IssuedCards;
                 if (issueCards.length !== 0) {
-                    success = true;
+                    paymentError = false;
                     authRequest.CardId = issueCards[0].Card.CardId;
                 }
                 authRequest.MerchantId = Site.current.getCustomPreferenceValue('merchantId');
@@ -46,17 +46,20 @@ server.get('CallBack', function (req, res, next) {
                 params = {};
                 params.paymentRequest = authRequest;
                 if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
-                    params.URL = 'purchases/v2/Authorize?InstantCommit=true';
+                    params.URL = 'purchases/v2/Authorize';
+                    authRequest.InstantCommit = true;
                 } else {
-                    params.URL = 'purchases/v2/Authorize?InstantCommit=false';
+                    params.URL = 'purchases/v2/Authorize';
+                    authRequest.InstantCommit = false;
                 }
-                result1 = svc.call(params);
+                purchaseApiResult = svc.call(params);
             } else {
-                success = false;
+                paymentError = true;
             }
         }
     }
-    if (!success) {
+    if (paymentError) {
+        Logger.getLogger('credPaymentController', 'credPaymentController').info('error occured during call Authorize Api');
         Transaction.wrap(function () {
             OrderMgr.failOrder(order, true);
             var currentBasket = BasketMgr.getCurrentBasket();
@@ -67,10 +70,10 @@ server.get('CallBack', function (req, res, next) {
                 }
             });
         });
-        res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'windowBehavior', windowBehavior, 'payemntError', 'error'));
+        res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'windowBehavior', windowBehavior, 'paymentError', 'error'));
     } else {
-        var res1 = JSON.parse(result1.object.text);
-        if (res1.Status === 'Approved') {
+        var purchaseApiRes = JSON.parse(purchaseApiResult.object.text);
+        if (purchaseApiRes.Status === 'Approved') {
             var fraudDetectionStatus = hooksHelper('app.fraud.detection', 'fraudDetection', order, require('*/cartridge/scripts/hooks/fraudDetection').fraudDetection);
             var placeOrderResult = COHelpers.placeOrder(order, fraudDetectionStatus);
             // Reset usingMultiShip after successful Order placement
@@ -80,14 +83,14 @@ server.get('CallBack', function (req, res, next) {
                     var paymentInstruments = order.paymentInstruments;
                     for (var i = 0; i < paymentInstruments.length; i++) {
                         if (paymentInstruments[i].paymentMethod === 'CRED_PAYMENT') {
-                            paymentInstruments[i].paymentTransaction.setTransactionID(res1.AuthId);
+                            paymentInstruments[i].paymentTransaction.setTransactionID(purchaseApiRes.AuthId);
                             if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
                                 paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_CAPTURE);
                                 order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
                             } else {
                                 paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_AUTH);
                             }
-                            paymentInstruments[i].custom.credPaymentResponse = result1.object.text;
+                            paymentInstruments[i].custom.credPaymentResponse = purchaseApiResult.object.text;
                         }
                     }
                 });
@@ -100,7 +103,7 @@ server.get('CallBack', function (req, res, next) {
                 order.custom.token = '';
                 order.custom.referenceId = '';
             });
-            res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'payemntError', 'error', 'windowBehavior', windowBehavior)); // paymentError
+            res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'paymentError', 'error', 'windowBehavior', windowBehavior)); // paymentError
         }
     }
     next();
@@ -113,13 +116,11 @@ server.post('HandleCloseIframe', server.middleware.https, function (req, res, ne
     Transaction.wrap(function () {
         OrderMgr.failOrder(order, true);
     });
-    var redirectUrl = URLUtils.https('Checkout-Begin', 'stage', 'payment', 'payemntError', 'error', 'closeIframe', 'closeIframe').toString();
+    var redirectUrl = URLUtils.https('Checkout-Begin', 'stage', 'payment', 'paymentError', 'error', 'closeIframe', 'closeIframe').toString();
     res.json({
         url: redirectUrl
     });
     next();
-    // res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'payemntError', 'error')); // paymentError
-    // next();
 });
 
 
