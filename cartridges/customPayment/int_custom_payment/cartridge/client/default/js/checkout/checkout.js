@@ -1,3 +1,6 @@
+/* eslint-disable  no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-lonely-if */
 'use strict';
 
 var customerHelpers = require('base/checkout/customer');

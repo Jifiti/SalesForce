@@ -40,7 +40,7 @@ function getPaymentRequest(order, paymentInstrument) {
         customerdetail.LastName = customer.profile.lastName;
         customerdetail.Email = customer.profile.email;
         customerdetail.MobilePhoneNumber = customer.profile.phoneHome;
-        customerdetail.DateOfBirth = customer.profile.birthday  ; //pass
+        customerdetail.DateOfBirth = customer.profile.birthday;
         customerdetail.CustomerGovernmentId = '';
         customerdetail.Last4SSN = null;
     } else {
@@ -113,7 +113,7 @@ function getPaymentRequest(order, paymentInstrument) {
         productDetail.OfferCategory = '';
         productDetail.SalesTax = order.allProductLineItems[i].adjustedTax.value;
         productDetail.Fees = fees;
-        productDetail.TotalCost = order.allProductLineItems[i].adjustedGrossPrice .value + fees;
+        productDetail.TotalCost = order.allProductLineItems[i].adjustedGrossPrice.value + fees;
         itemsDetails.push(productDetail);
     }
     for (var ind = 0; ind < order.defaultShipment.shippingLineItems.length; ind++) {
