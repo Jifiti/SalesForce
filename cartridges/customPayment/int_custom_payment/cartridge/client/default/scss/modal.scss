@@ -1,0 +1,11 @@
+.payment-error {
+    .modal-dialog {
+        max-width: 350px;
+
+        .modal-body {
+            button {
+                background-color: black;
+            }
+        }
+    }
+}
