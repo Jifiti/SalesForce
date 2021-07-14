@@ -72,7 +72,7 @@ function Authorize(orderNumber, paymentInstrument, paymentProcessor) {
     var svc = credPaymentService.credPaymentSendPaymentRequest();
     var params = {};
     params.paymentRequest = paymentRequest;
-    params.URL = 'applications/v2/InitiateFlow';
+    params.URL = Site.current.getCustomPreferenceValue('initiateFlowApi');
     var result = svc.call(params);
     var errorMessages = [];
     var credPaymentRedirectUrl;
@@ -82,7 +82,6 @@ function Authorize(orderNumber, paymentInstrument, paymentProcessor) {
         if (resultObj.RedirectURL) {
             credPaymentRedirectUrl = resultObj.RedirectURL;
             Transaction.wrap(function () {
-                order.custom.redirectURL = resultObj.RedirectURL;
                 order.custom.referenceId = resultObj.ReferenceId;
             });
         } else {

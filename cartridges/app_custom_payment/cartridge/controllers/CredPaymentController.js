@@ -29,27 +29,24 @@ server.get('CallBack', function (req, res, next) {
         var svc = checkStatusService.sendCheckStatusRequest();
         var refID = order.custom.referenceId;
         var params = {};
-        // params.URL = 'applications/v2/CheckAccountStatus?ReferenceId=' + refID; // url helper
         var parameters = {};
         parameters.ReferenceId = refID;
-        params.URL = urlHelper.appendQueryParams('applications/v2/CheckAccountStatus', parameters);
+        params.URL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('checkAccountStatusApi'), parameters);
         var result = svc.call(params);
         if (result.ok) {
             var resultObj = JSON.parse(result.object.text);
             var status = resultObj.Status;
-            if (status === 'AccountCreated' && resultObj.OpenToBuy >= order.getTotalGrossPrice().value) {
+            Logger.getLogger('credPaymentController', 'credPaymentController').info('checkAccountStatusAPi response' + result.object.text);
+            if (status === 'AccountCreated' && resultObj.OpenToBuy >= order.getTotalGrossPrice().value &&  resultObj.IssuedCards.length !== 0) {
                 var authRequest = {};
                 authRequest.RequestedAmount = order.getTotalGrossPrice().value;
                 authRequest.Currency = order.getCurrencyCode();
                 var issueCards = resultObj.IssuedCards;
-                if (issueCards.length !== 0) {
-                    paymentError = false;
-                    authRequest.CardId = issueCards[0].Card.CardId;
-                }
+                authRequest.CardId = issueCards[0].Card.CardId;
                 authRequest.MerchantId = Site.current.getCustomPreferenceValue('merchantId');
                 svc = credPaymentService.credPaymentSendPaymentRequest();
                 params = {};
-                params.URL = 'purchases/v2/Authorize';
+                params.URL = Site.current.getCustomPreferenceValue('PurchaseApi');
                 if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
                     authRequest.InstantCommit = true;
                 } else {
@@ -57,6 +54,33 @@ server.get('CallBack', function (req, res, next) {
                 }
                 params.paymentRequest = authRequest;
                 purchaseApiResult = svc.call(params);
+                var purchaseApiRes = JSON.parse(purchaseApiResult.object.text);
+                Logger.getLogger('credPaymentController', 'credPaymentController').info('Authorize ApI response' + result.object.text);
+                if (purchaseApiRes.Status === 'Approved') {
+                    var fraudDetectionStatus = hooksHelper('app.fraud.detection', 'fraudDetection', order, require('*/cartridge/scripts/hooks/fraudDetection').fraudDetection);
+                    var placeOrderResult = COHelpers.placeOrder(order, fraudDetectionStatus);
+                    // Reset usingMultiShip after successful Order placement
+                    req.session.privacyCache.set('usingMultiShipping', false);
+                    if (!placeOrderResult.error) {
+                        Transaction.wrap(function () {
+                            var paymentInstruments = order.paymentInstruments;
+                            for (var i = 0; i < paymentInstruments.length; i++) {
+                                if (paymentInstruments[i].paymentMethod === 'CRED_PAYMENT') {
+                                    paymentInstruments[i].paymentTransaction.setTransactionID(purchaseApiRes.AuthId);
+                                    if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
+                                        paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_CAPTURE);
+                                        order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
+                                    } else {
+                                        paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_AUTH);
+                                    }
+                                    paymentInstruments[i].custom.credPaymentResponse = purchaseApiResult.object.text;
+                                }
+                            }
+                        });
+                    }
+                    res.redirect(URLUtils.url('credPaymentOrder-Confirm', 'ID', order.orderNo, 'token', order.orderToken).toString());
+                    return next();
+                }
             } else {
                 paymentError = true;
             }
@@ -75,41 +99,10 @@ server.get('CallBack', function (req, res, next) {
             });
         });
         res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'windowBehavior', windowBehavior, 'paymentError', 'error'));
-    } else {
-        var purchaseApiRes = JSON.parse(purchaseApiResult.object.text);
-        if (purchaseApiRes.Status === 'Approved') {
-            var fraudDetectionStatus = hooksHelper('app.fraud.detection', 'fraudDetection', order, require('*/cartridge/scripts/hooks/fraudDetection').fraudDetection);
-            var placeOrderResult = COHelpers.placeOrder(order, fraudDetectionStatus);
-            // Reset usingMultiShip after successful Order placement
-            req.session.privacyCache.set('usingMultiShipping', false);
-            if (!placeOrderResult.error) {
-                Transaction.wrap(function () {
-                    var paymentInstruments = order.paymentInstruments;
-                    for (var i = 0; i < paymentInstruments.length; i++) {
-                        if (paymentInstruments[i].paymentMethod === 'CRED_PAYMENT') {
-                            paymentInstruments[i].paymentTransaction.setTransactionID(purchaseApiRes.AuthId);
-                            if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
-                                paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_CAPTURE);
-                                order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
-                            } else {
-                                paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_AUTH);
-                            }
-                            paymentInstruments[i].custom.credPaymentResponse = purchaseApiResult.object.text;
-                        }
-                    }
-                });
-            }
-            res.redirect(URLUtils.url('credPaymentOrder-Confirm', 'ID', order.orderNo, 'token', order.orderToken).toString());
-            return next();
-        } else {
-            Transaction.wrap(function () {
-                OrderMgr.failOrder(order, true);
-            });
-            res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'paymentError', 'error', 'windowBehavior', windowBehavior)); // paymentError
-        }
     }
     next();
 });
+
 server.post('HandleCloseIframe', server.middleware.https, function (req, res, next) {
     var URLUtils = require('dw/web/URLUtils');
     var Transaction = require('dw/system/Transaction');

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
     <custom-preferences>
-        <all-instances/>
-        <development>
+        <all-instances>
             <preference preference-id="CompletionMethod">TransferCard</preference>
             <preference preference-id="SourceChannel">Online</preference>
             <preference preference-id="callBackURL">https://zyaf-001.sandbox.us01.dx.commercecloud.salesforce.com/on/demandware.store/Sites-RefArch-Site/en_US/CredPaymentController-CallBack</preference>
-            <preference preference-id="credPaymentToken">9394144a255d43d9aa1f6d199a4d0109</preference>
-            <preference preference-id="lenderId">vxm8wxono74ewf9ulbltovn7swk5n4to</preference>
-            <preference preference-id="merchantId">5596f4af2d594237a5ff7c946a797fc7</preference>
+            <preference preference-id="credPaymentToken">cred payment token</preference>
+            <preference preference-id="lenderId">lenderId</preference>
+            <preference preference-id="merchantId">merchantId</preference>
             <preference preference-id="productTypes">
                 <value>CO</value>
                 <value>LC</value>
@@ -25,16 +24,11 @@
             <preference preference-id="storeId">Tel Aviv</preference>
             <preference preference-id="windowBehavior">SameTab</preference>
             <preference preference-id="paymentTransactionType">Capture</preference>
-            <preference preference-id="credPaymentDescription">&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-
-                &lt;div style="direction: ltr;"&gt;Click 'Place Order' and start your application.&lt;/div&gt;
-
-                &lt;div style="direction: ltr;"&gt;&amp;nbsp;&lt;/div&gt;
-
-                &lt;div style="direction: ltr;"&gt;Once you complete the application process you will be redirect to order confirmation page and receive a confirmation email.&lt;br /&gt;
-                No need to do anything further. your order will be processed and sent to you!&lt;/div&gt;
-            </preference>
-        </development>
+            <preference preference-id="checkAccountStatusApi">applications/v2/CheckAccountStatus</preference>
+            <preference preference-id="initiateFlowApi">applications/v2/InitiateFlow</preference>
+            <preference preference-id="PurchaseApi">purchases/v2/Authorize</preference>
+        </all-instances>
+        <development/>
         <staging/>
         <production/>
     </custom-preferences>
