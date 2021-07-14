@@ -1,3 +1,0 @@
-<div class="cred-payment-summary">
-   ${payment.paymentName}
-</div>
