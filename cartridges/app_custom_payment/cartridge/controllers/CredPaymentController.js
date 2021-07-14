@@ -37,7 +37,7 @@ server.get('CallBack', function (req, res, next) {
             var resultObj = JSON.parse(result.object.text);
             var status = resultObj.Status;
             Logger.getLogger('credPaymentController', 'credPaymentController').info('checkAccountStatusAPi response' + result.object.text);
-            if (status === 'AccountCreated' && resultObj.OpenToBuy >= order.getTotalGrossPrice().value &&  resultObj.IssuedCards.length !== 0) {
+            if (status === 'AccountCreated' && resultObj.OpenToBuy >= order.getTotalGrossPrice().value && resultObj.IssuedCards.length !== 0) {
                 var authRequest = {};
                 var PIS = order.paymentInstruments;
                 for (var p = 0; p < PIS.length; p++) {

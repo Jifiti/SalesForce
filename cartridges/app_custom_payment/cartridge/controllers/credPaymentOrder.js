@@ -4,7 +4,6 @@
 'use strict';
 
 var server = require('server');
-var csrfProtection = require('*/cartridge/scripts/middleware/csrf');
 var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
@@ -29,7 +28,7 @@ server.get(
 
             return next();
         }
-        var orderNo = req.form.orderID ? req.form.orderID: req.querystring.ID;
+        var orderNo = req.form.orderID ? req.form.orderID : req.querystring.ID;
         var token = req.form.orderToken ? req.form.orderToken : req.querystring.token;
         order = OrderMgr.getOrder(orderNo, token);
 
