@@ -367,11 +367,9 @@ var scrollAnimate = require('base/components/scrollAnimate');
                                     if (data.windowBehavior === 'NewTab') {
                                         $('body').trigger('checkout:disableButton', '.next-step-button button');
                                         window.open(data.credPaymentUrl, '_blank');
-                                    }
-                                    if (data.windowBehavior === 'SameTab') {
+                                    } else if (data.windowBehavior === 'SameTab') {
                                         window.location = data.credPaymentUrl;
-                                    }
-                                    if (data.windowBehavior === 'Lightbox') {
+                                    } else if (data.windowBehavior === 'Lightbox') {
                                         var callBackUrl = data.callBackUrl;
                                         var orderNo = data.orderNo;
                                         $('.payment-modal .close').data('orderno', orderNo);
@@ -454,10 +452,18 @@ var scrollAnimate = require('base/components/scrollAnimate');
                     $('.credit-card-form').toggle($(this).val() === 'CREDIT_CARD');
                 });
 
-                var urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.get('paymentError')) {
-                    if (!urlParams.get('closeIframe')) {
-                        if (urlParams.get('windowBehavior') === 'Lightbox') {
+                var urlParams = [];
+                var hash;
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < hashes.length; i++) {
+                    hash = hashes[i].split('=');
+                    urlParams.push(hash[0]);
+                    urlParams[hash[0]] = hash[1];
+                }
+
+                if (urlParams.paymentError) {
+                    if (!urlParams.closeIframe) {
+                        if (urlParams.windowBehavior === 'Lightbox') {
                             $('#paymentError').modal('show');
                         } else {
                             $('.error-message').show();
