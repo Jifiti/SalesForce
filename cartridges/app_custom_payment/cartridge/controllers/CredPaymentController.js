@@ -39,7 +39,12 @@ server.get('CallBack', function (req, res, next) {
             Logger.getLogger('credPaymentController', 'credPaymentController').info('checkAccountStatusAPi response' + result.object.text);
             if (status === 'AccountCreated' && resultObj.OpenToBuy >= order.getTotalGrossPrice().value &&  resultObj.IssuedCards.length !== 0) {
                 var authRequest = {};
-                authRequest.RequestedAmount = order.getTotalGrossPrice().value;
+                var PIS = order.paymentInstruments;
+                for (var p = 0; p < PIS.length; p++) {
+                    if (PIS[p].paymentMethod === 'CRED_PAYMENT') {
+                        authRequest.RequestedAmount = PIS[p].paymentTransaction.amount.value;
+                    }
+                }
                 authRequest.Currency = order.getCurrencyCode();
                 var issueCards = resultObj.IssuedCards;
                 authRequest.CardId = issueCards[0].Card.CardId;
