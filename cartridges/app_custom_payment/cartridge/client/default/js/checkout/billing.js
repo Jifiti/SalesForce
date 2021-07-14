@@ -198,7 +198,7 @@ function updatePaymentInformation(order) {
     }
     if (order.billing.payment && order.billing.payment.selectedPaymentInstruments
         && order.billing.payment.selectedPaymentInstruments.length > 0 && order.billing.payment.selectedPaymentInstruments[0].paymentMethod === 'CRED_PAYMENT') {
-        htmlToAppend += '<span>' + order.billing.payment.selectedPaymentInstruments[0].paymentMethod + '</span>';
+        htmlToAppend += '<span>' + order.billing.payment.selectedPaymentInstruments[0].paymentName + '</span>';
     }
 
     $paymentSummary.empty().append(htmlToAppend);

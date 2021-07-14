@@ -372,8 +372,8 @@ var scrollAnimate = require('base/components/scrollAnimate');
                                         var callBackUrl = data.callBackUrl;
                                         var orderNo = data.orderNo;
                                         $('.payment-modal .close').data('orderno', orderNo);
-                                        window.addEventListener('message', function(e) {
-                                            if(e.data === "closeIframe") {
+                                        window.addEventListener('message', function (e) {
+                                            if (e.data === 'closeIframe') {
                                                 $('#paymentModal').modal('hide');
                                                 window.top.location.href = callBackUrl;
                                             }

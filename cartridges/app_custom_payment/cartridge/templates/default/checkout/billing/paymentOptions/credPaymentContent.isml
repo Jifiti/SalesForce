@@ -7,5 +7,5 @@
                value="CRED_PAYMENT"
         >
     </fieldset>
-     <isprint value=${dw.system.Site.current.getCustomPreferenceValue('credPaymentDescription')} encoding="off"/>
+     <isprint value="${paymentOption.longDescription}" encoding="off" />
 </div>

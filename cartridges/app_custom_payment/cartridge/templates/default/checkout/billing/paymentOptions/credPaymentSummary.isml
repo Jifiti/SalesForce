@@ -1,3 +1,3 @@
 <div class="cred-payment-summary">
-    ${Resource.msg('msg.payment.type.credpayment', 'credPayment', null)}
+   ${payment.paymentName}
 </div>

@@ -64,10 +64,11 @@ function Handle(basket, paymentInformation, paymentMethodID, req) {
 function Authorize(orderNumber, paymentInstrument, paymentProcessor) {
     var OrderMgr = require('dw/order/OrderMgr');
     var credPaymentCheckout = require('*/cartridge/scripts/credPaymentCheckout.js');
+    var credPaymentService = require('*/cartridge/scripts/checkout/svc/credPaymentApi');
+
     var order = OrderMgr.getOrder(orderNumber);
     var error = false;
     var paymentRequest = credPaymentCheckout.getPaymentRequest(order, paymentInstrument);
-    var credPaymentService = require('*/cartridge/scripts/checkout/svc/credPaymentApi');
     var svc = credPaymentService.credPaymentSendPaymentRequest();
     var params = {};
     params.paymentRequest = paymentRequest;

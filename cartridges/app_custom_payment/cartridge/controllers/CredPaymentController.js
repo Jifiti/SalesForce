@@ -17,16 +17,22 @@ server.get('CallBack', function (req, res, next) {
     // var Resource = require('dw/web/Resource');
     var Logger = require('dw/system/Logger');
     var checkStatusService = require('*/cartridge/scripts/checkout/svc/checkStatusApi');
+    var credPaymentService = require('*/cartridge/scripts/checkout/svc/credPaymentApi');
+    var urlHelper = require('*/cartridge/scripts/helpers/urlHelpers');
+
     var paymentError = true;
     var purchaseApiResult;
-    var order = OrderMgr.getOrder(request.httpParameterMap.orderID);
-    var token = request.httpParameterMap.token.stringValue;
+    var order = OrderMgr.getOrder(req.querystring.orderID);
+    var token = req.querystring.token;
     var windowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value;
-    if (order && order.custom.token === token) {
+    if (order && order.custom.orderToken === token) {
         var svc = checkStatusService.sendCheckStatusRequest();
         var refID = order.custom.referenceId;
         var params = {};
-        params.URL = 'applications/v2/CheckAccountStatus?ReferenceId=' + refID;
+        // params.URL = 'applications/v2/CheckAccountStatus?ReferenceId=' + refID; // url helper
+        var parameters = {};
+        parameters.ReferenceId = refID;
+        params.URL = urlHelper.appendQueryParams('applications/v2/CheckAccountStatus', parameters);
         var result = svc.call(params);
         if (result.ok) {
             var resultObj = JSON.parse(result.object.text);
@@ -41,14 +47,12 @@ server.get('CallBack', function (req, res, next) {
                     authRequest.CardId = issueCards[0].Card.CardId;
                 }
                 authRequest.MerchantId = Site.current.getCustomPreferenceValue('merchantId');
-                var credPaymentService = require('*/cartridge/scripts/checkout/svc/credPaymentApi');
                 svc = credPaymentService.credPaymentSendPaymentRequest();
                 params = {};
+                params.URL = 'purchases/v2/Authorize';
                 if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
-                    params.URL = 'purchases/v2/Authorize';
                     authRequest.InstantCommit = true;
                 } else {
-                    params.URL = 'purchases/v2/Authorize';
                     authRequest.InstantCommit = false;
                 }
                 params.paymentRequest = authRequest;
@@ -100,8 +104,6 @@ server.get('CallBack', function (req, res, next) {
         } else {
             Transaction.wrap(function () {
                 OrderMgr.failOrder(order, true);
-                order.custom.token = '';
-                order.custom.referenceId = '';
             });
             res.redirect(URLUtils.https('Checkout-Begin', 'stage', 'payment', 'paymentError', 'error', 'windowBehavior', windowBehavior)); // paymentError
         }

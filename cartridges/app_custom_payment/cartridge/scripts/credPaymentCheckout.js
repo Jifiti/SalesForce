@@ -15,15 +15,20 @@ function getPaymentRequest(order, paymentInstrument) {
     var lenderId = Site.current.getCustomPreferenceValue('lenderId');
     var merchantId = Site.current.getCustomPreferenceValue('merchantId');
     var storeId = Site.current.getCustomPreferenceValue('storeId');
+    var urlHelper = require('*/cartridge/scripts/helpers/urlHelpers');
+    var ArrayList = require('dw/util/ArrayList');
     var paymentReq = {};
     var ammount = paymentInstrument.paymentTransaction.amount.value;
     var currencyCode = order.getCurrencyCode();
     var orderNo = order.getOrderNo();
     var token = UUIDUtils.createUUID();
     Transaction.wrap(function () {
-        order.custom.token = token;
+        order.custom.orderToken = token;
     });
-    var callBackURL = Site.current.getCustomPreferenceValue('callBackURL') + '/?orderID=' + orderNo + '&&token=' + token;
+    var parameters = {};
+    parameters.orderID = orderNo;
+    parameters.token = token;
+    var callBackURL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('callBackURL'), parameters);
     var customerEmail = order.getCustomerEmail();
     var customerdetail = {};
     var billingAddressDetail = {};
@@ -35,8 +40,8 @@ function getPaymentRequest(order, paymentInstrument) {
         customerdetail.LastName = customer.profile.lastName;
         customerdetail.Email = customer.profile.email;
         customerdetail.MobilePhoneNumber = customer.profile.phoneHome;
-        customerdetail.DateOfBirth = null;
-        customerdetail.CustomerGovernmentId = '123456789';
+        customerdetail.DateOfBirth = customer.profile.birthday  ; //pass
+        customerdetail.CustomerGovernmentId = '';
         customerdetail.Last4SSN = null;
     } else {
         customerdetail.FirstName = billingAddress.firstName ? billingAddress.firstName : '';
@@ -69,6 +74,7 @@ function getPaymentRequest(order, paymentInstrument) {
     }
     paymentReq.BillingAddress = billingAddressDetail;
     paymentReq.ShippingAddress = shippingAddressDetail;
+    // Loyalty information
     var customerLoyaltyDetail = {};
     customerLoyaltyDetail.LoyaltyNumber = customer.authenticated && customer.registered ? customer.profile.customerNo : '';
     customerLoyaltyDetail.LoyaltyStartDate = '';
@@ -84,7 +90,7 @@ function getPaymentRequest(order, paymentInstrument) {
     paymentReq.CallbackURL = callBackURL;
     paymentReq.NotificationAPIURL = '';
     var productTypesValues = Site.current.getCustomPreferenceValue('productTypes');
-    var productTypesList = new dw.util.ArrayList(productTypesValues);
+    var productTypesList = new ArrayList(productTypesValues);
     var productTypes = productTypesList.toArray();
     paymentReq.AllowedProductTypes = productTypes;
     paymentReq.ClientCustomData1 = '';
@@ -107,7 +113,7 @@ function getPaymentRequest(order, paymentInstrument) {
         productDetail.OfferCategory = '';
         productDetail.SalesTax = order.allProductLineItems[i].adjustedTax.value;
         productDetail.Fees = fees;
-        productDetail.TotalCost = order.allProductLineItems[i].grossPrice.value + fees;
+        productDetail.TotalCost = order.allProductLineItems[i].adjustedGrossPrice .value + fees;
         itemsDetails.push(productDetail);
     }
     for (var ind = 0; ind < order.defaultShipment.shippingLineItems.length; ind++) {

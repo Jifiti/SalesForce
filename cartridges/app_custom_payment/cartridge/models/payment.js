@@ -16,7 +16,8 @@ function applicablePaymentMethods(paymentMethods) {
         return {
             ID: method.ID,
             name: method.name,
-            description: method.description
+            description: method.description,
+            longDescription: method.custom.longDescription
         };
     });
 }
@@ -44,10 +45,16 @@ function applicablePaymentCards(paymentCards) {
  * @returns {Array} Array of objects that contain information about the selected payment instruments
  */
 function getSelectedPaymentInstruments(selectedPaymentInstruments) {
+    var paymentName;
     return collections.map(selectedPaymentInstruments, function (paymentInstrument) {
+        if (paymentInstrument.paymentMethod === 'CRED_PAYMENT') {
+            var credPayment = PaymentMgr.getPaymentMethod('CRED_PAYMENT');
+            paymentName = credPayment.name;
+        }
         var results = {
             paymentMethod: paymentInstrument.paymentMethod,
-            amount: paymentInstrument.paymentTransaction.amount.value
+            amount: paymentInstrument.paymentTransaction.amount.value,
+            paymentName: paymentName
         };
         if (paymentInstrument.paymentMethod === 'CREDIT_CARD') {
             results.lastFour = paymentInstrument.creditCardNumberLastDigits;
