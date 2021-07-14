@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+
+    <type-extension type-id="OrderPaymentInstrument">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="credPaymentResponse">
+                <display-name xml:lang="x-default">Cred Payment Response</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="CredPayment">
+                <display-name xml:lang="x-default">CredPayment</display-name>
+                <attribute attribute-id="credPaymentResponse"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+
+    <type-extension type-id="SitePreferences">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="CompletionMethod">
+                <display-name xml:lang="x-default">CompletionMethod</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">TransferCard</display>
+                        <value>TransferCard</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">CompletePurchase</display>
+                        <value>CompletePurchase</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">CreateAccount</display>
+                        <value>CreateAccount</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="SourceChannel">
+                <display-name xml:lang="x-default">SourceChannel</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Online</display>
+                        <value>Online</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">In_Store</display>
+                        <value>In_Store</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="callBackURL">
+                <display-name xml:lang="x-default">callBackURL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="credPaymentToken">
+                <display-name xml:lang="x-default">credPaymentToken</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lenderId">
+                <display-name xml:lang="x-default">LenderId</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="merchantId">
+                <display-name xml:lang="x-default">MerchantId</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="productTypes">
+                <display-name xml:lang="x-default">productTypes</display-name>
+                <type>set-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="sourcePageType">
+                <display-name xml:lang="x-default">SourcePageType</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Financing</display>
+                        <value>Financing</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">PIP</display>
+                        <value>PIP</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Cart</display>
+                        <value>Cart</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Checkout</display>
+                        <value>Checkout</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="storeId">
+                <display-name xml:lang="x-default">StoreId</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="windowBehavior">
+                <display-name xml:lang="x-default">WindowBehavior</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">NewTab</display>
+                        <value>NewTab</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">SameTab</display>
+                        <value>SameTab</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Lightbox</display>
+                        <value>Lightbox</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="paymentTransactionType">
+                <display-name xml:lang="x-default">Payment Transaction Type</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Auth</display>
+                        <value>Auth</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">Capture</display>
+                        <value>Capture</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="PurchaseApi">
+                <display-name xml:lang="x-default">PurchaseApi</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="checkAccountStatusApi">
+                <display-name xml:lang="x-default">checkAccountStatusApi</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="initiateFlowApi">
+                <display-name xml:lang="x-default">initiateFlowApi</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="CredPayment">
+                <display-name xml:lang="x-default">CredPayment</display-name>
+                <attribute attribute-id="credPaymentToken"/>
+                <attribute attribute-id="lenderId"/>
+                <attribute attribute-id="merchantId"/>
+                <attribute attribute-id="storeId"/>
+                <attribute attribute-id="callBackURL"/>
+                <attribute attribute-id="productTypes"/>
+                <attribute attribute-id="sourcePageType"/>
+                <attribute attribute-id="SourceChannel"/>
+                <attribute attribute-id="CompletionMethod"/>
+                <attribute attribute-id="windowBehavior"/>
+                <attribute attribute-id="paymentTransactionType"/>
+                <attribute attribute-id="checkAccountStatusApi"/>
+                <attribute attribute-id="PurchaseApi"/>
+                <attribute attribute-id="initiateFlowApi"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="Order">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="orderToken">
+                <display-name xml:lang="x-default">orderToken</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="referenceId">
+                <display-name xml:lang="x-default">ReferenceId</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Jifity Attributes">
+                <display-name xml:lang="x-default">Jifity Attributes</display-name>
+                <attribute attribute-id="referenceId"/>
+                <attribute attribute-id="orderToken"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+    <type-extension type-id="PaymentMethod">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="longDescription">
+                <display-name xml:lang="x-default">Long Description</display-name>
+                <type>html</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="CredPayment">
+                <display-name xml:lang="x-default">CredPayment</display-name>
+                <attribute attribute-id="longDescription"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>
