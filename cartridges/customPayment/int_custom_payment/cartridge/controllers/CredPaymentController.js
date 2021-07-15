@@ -59,9 +59,8 @@ server.get('CallBack', function (req, res, next) {
                 }
                 params.paymentRequest = authRequest;
                 purchaseApiResult = svc.call(params);
-                var purchaseApiRes = JSON.parse(purchaseApiResult.object.text);
-                Logger.getLogger('credPaymentController', 'credPaymentController').info('Authorize ApI response' + result.object.text);
-                if (purchaseApiRes.Status === 'Approved') {
+                var purchaseApiRes = purchaseApiResult.object ? JSON.parse(purchaseApiResult.object.text) : null;
+                if (purchaseApiRes && purchaseApiRes.Status === 'Approved') {
                     var fraudDetectionStatus = hooksHelper('app.fraud.detection', 'fraudDetection', order, require('*/cartridge/scripts/hooks/fraudDetection').fraudDetection);
                     var placeOrderResult = COHelpers.placeOrder(order, fraudDetectionStatus);
                     // Reset usingMultiShip after successful Order placement
