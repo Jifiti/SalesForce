@@ -19,7 +19,7 @@
     <service service-id="credPayment.rest">
         <service-type>HTTP</service-type>
         <enabled>true</enabled>
-        <log-prefix>Jifity</log-prefix>
+        <log-prefix>credpayment</log-prefix>
         <comm-log-enabled>true</comm-log-enabled>
         <force-prd-enabled>false</force-prd-enabled>
         <mock-mode-enabled>false</mock-mode-enabled>
