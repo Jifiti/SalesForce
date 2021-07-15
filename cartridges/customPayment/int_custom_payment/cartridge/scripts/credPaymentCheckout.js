@@ -105,10 +105,12 @@ function getPaymentRequest(order, paymentInstrument) {
         if (productShippingLintItem !== null) {
             fees = productShippingLintItem ? productShippingLintItem.adjustedGrossPrice.value : 0.0;
         }
+        var product = order.allProductLineItems[i].getProduct();
+        var image = product.getImage('small').getAbsURL().toString();
         productDetail.Quantity = order.allProductLineItems[i].quantity.value;
         productDetail.Price = order.allProductLineItems[i].adjustedNetPrice.value;
         productDetail.Currency = order.allProductLineItems[i].grossPrice.currencyCode;
-        productDetail.ImageURL = '';
+        productDetail.ImageURL = image;
         productDetail.Eligible = 'true';
         productDetail.OfferCategory = '';
         productDetail.SalesTax = order.allProductLineItems[i].adjustedTax.value;
