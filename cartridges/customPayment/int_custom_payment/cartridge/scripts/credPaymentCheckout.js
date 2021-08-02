@@ -98,40 +98,65 @@ function getPaymentRequest(order, paymentInstrument) {
     var itemsDetails = [];
     var fees = 0;
     for (var i = 0; i < order.allProductLineItems.length; i++) {
-        var productDetail = {};
-        productDetail.Name = order.allProductLineItems[i].productName;
-        productDetail.SKU = order.allProductLineItems[i].productID;
-        var productShippingLintItem = order.allProductLineItems[i].getShippingLineItem();
-        if (productShippingLintItem !== null) {
-            fees = productShippingLintItem ? productShippingLintItem.adjustedGrossPrice.value : 0.0;
+        var productLineItem = order.allProductLineItems[i];
+        if (!(productLineItem.optionProductLineItem || productLineItem.bundledProductLineItem)) {
+            var productDetail = {};
+            productDetail.Name = productLineItem.productName;
+            productDetail.SKU = productLineItem.productID;
+            var productShippingLintItem = productLineItem.getShippingLineItem();
+            if (productShippingLintItem !== null) {
+                fees = productShippingLintItem ? productShippingLintItem.adjustedGrossPrice.value : 0.0;
+            }
+            var product = productLineItem.getProduct();
+            var image = product ? product.getImage('small').getAbsURL().toString() : null;
+            productDetail.Quantity = productLineItem.quantity.value;
+            productDetail.Price = productLineItem.adjustedNetPrice.value;
+            productDetail.Currency = order.currencyCode;
+            productDetail.ImageURL = image;
+            productDetail.Eligible = 'true';
+            productDetail.OfferCategory = '';
+            productDetail.SalesTax = productLineItem.adjustedTax.value;
+            productDetail.Fees = fees;
+            productDetail.TotalCost = productLineItem.adjustedGrossPrice.value + fees;
+            itemsDetails.push(productDetail);
         }
-        var product = order.allProductLineItems[i].getProduct();
-        var image = product.getImage('small').getAbsURL().toString();
-        productDetail.Quantity = order.allProductLineItems[i].quantity.value;
-        productDetail.Price = order.allProductLineItems[i].adjustedNetPrice.value;
-        productDetail.Currency = order.allProductLineItems[i].grossPrice.currencyCode;
-        productDetail.ImageURL = image;
-        productDetail.Eligible = 'true';
-        productDetail.OfferCategory = '';
-        productDetail.SalesTax = order.allProductLineItems[i].adjustedTax.value;
-        productDetail.Fees = fees;
-        productDetail.TotalCost = order.allProductLineItems[i].adjustedGrossPrice.value + fees;
-        itemsDetails.push(productDetail);
     }
-    for (var ind = 0; ind < order.defaultShipment.shippingLineItems.length; ind++) {
-        var shippingDetail = {};
-        shippingDetail.Name = order.defaultShipment.shippingLineItems[0].lineItemText;
-        shippingDetail.SKU = order.defaultShipment.shippingLineItems[0].ID;
-        shippingDetail.Quantity = 1;
-        shippingDetail.Price = order.defaultShipment.shippingLineItems[ind].adjustedNetPrice.value;
-        shippingDetail.Currency = order.defaultShipment.shippingLineItems[ind].grossPrice.currencyCode;
-        shippingDetail.ImageURL = '';
-        shippingDetail.Eligible = 'true';
-        shippingDetail.OfferCategory = '';
-        shippingDetail.SalesTax = order.defaultShipment.shippingLineItems[ind].adjustedTax.value;
-        shippingDetail.Fees = 0.0;
-        shippingDetail.TotalCost = order.defaultShipment.shippingLineItems[ind].grossPrice.value;
-        itemsDetails.push(shippingDetail);
+    var allShipments = order.getShipments();
+    for (var p = 0; p < allShipments.length; p++) {
+        for (var ind = 0; ind < allShipments[p].shippingLineItems.length; ind++) {
+            var shippingDetail = {};
+            var shipmentLineItem = allShipments[p].shippingLineItems[ind];
+            shippingDetail.Name = shipmentLineItem.lineItemText;
+            shippingDetail.SKU = shipmentLineItem.ID;
+            shippingDetail.Quantity = 1;
+            shippingDetail.Price = shipmentLineItem.adjustedNetPrice.value;
+            shippingDetail.Currency = shipmentLineItem.grossPrice.currencyCode;
+            shippingDetail.ImageURL = '';
+            shippingDetail.Eligible = 'true';
+            shippingDetail.OfferCategory = '';
+            shippingDetail.SalesTax = shipmentLineItem.adjustedTax.value;
+            shippingDetail.Fees = 0.0;
+            shippingDetail.TotalCost = shipmentLineItem.adjustedGrossPrice.value;
+            itemsDetails.push(shippingDetail);
+        }
+    }
+    var orderPriceAdjustments = order.getPriceAdjustments();
+    var index = 0;
+    for (index = 0; index < orderPriceAdjustments.length; index++) {
+        var priceAdjustDetail = {};
+        var priceAdjust = orderPriceAdjustments[index];
+        priceAdjustDetail.Name = 'Order Adjustment ' + priceAdjust.promotionID;
+        priceAdjustDetail.SKU = priceAdjust.promotionID;
+        priceAdjustDetail.Quantity = priceAdjust.quantity;
+        priceAdjustDetail.Price = priceAdjust.netPrice.value;
+        priceAdjustDetail.Currency = order.currencyCode;
+        priceAdjustDetail.ImageURL = '';
+        priceAdjustDetail.Eligible = 'true';
+        priceAdjustDetail.OfferCategory = '';
+        priceAdjustDetail.SalesTax = priceAdjust.tax.value;
+        priceAdjustDetail.Fees = 0.0;
+        priceAdjustDetail.TotalCost = priceAdjust.grossPrice.value;
+        itemsDetails.push(priceAdjustDetail);
     }
     paymentReq.Items = itemsDetails;
     paymentReq.SourceChannel = Site.current.getCustomPreferenceValue('SourceChannel').value;

@@ -1,6 +1,3 @@
-/* eslint-disable  no-undef */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-lonely-if */
 'use strict';
 
 var customerHelpers = require('base/checkout/customer');
@@ -348,12 +345,16 @@ var scrollAnimate = require('base/components/scrollAnimate');
                 } else if (stage === 'placeOrder') {
                     // disable the placeOrder button here
                     $('body').trigger('checkout:disableButton', '.next-step-button button');
+                    $.spinner().start();
+
                     $.ajax({
                         url: $('.place-order').data('action'),
                         method: 'POST',
                         success: function (data) {
                             // enable the placeOrder button here
                             $('body').trigger('checkout:enableButton', '.next-step-button button');
+                            $.spinner().stop();
+
                             if (data.error) {
                                 if (data.cartError) {
                                     window.location.href = data.redirectUrl;

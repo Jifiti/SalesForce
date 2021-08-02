@@ -81,9 +81,14 @@ server.get('CallBack', function (req, res, next) {
                                 }
                             }
                         });
+                        paymentError = false;
+                        if (order.getCustomerEmail()) {
+                            COHelpers.sendConfirmationEmail(order, req.locale.id);
+                        }
+                        res.redirect(URLUtils.url('credPaymentOrder-Confirm', 'ID', order.orderNo, 'token', order.orderToken).toString());
+                        return next();
                     }
-                    res.redirect(URLUtils.url('credPaymentOrder-Confirm', 'ID', order.orderNo, 'token', order.orderToken).toString());
-                    return next();
+                    paymentError = true;
                 }
             } else {
                 paymentError = true;

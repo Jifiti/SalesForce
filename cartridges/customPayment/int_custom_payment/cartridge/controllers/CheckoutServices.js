@@ -3,12 +3,29 @@
 
 var server = require('server');
 server.extend(module.superModule);
+var BasketMgr = require('dw/order/BasketMgr');
+var Transaction = require('dw/system/Transaction');
+var collections = require('*/cartridge/scripts/util/collections');
+server.prepend('SubmitPayment', server.middleware.https, function (req, res, next) {
+    var paymentForm = server.forms.getForm('billing');
+    var paymentMethodIdValue = paymentForm.paymentMethod.value;
+    if (paymentMethodIdValue !== 'CRED_PAYMENT') {
+        var currentBasket = BasketMgr.getCurrentBasket();
+        Transaction.wrap(function () {
+            var allPaymentInstruments = currentBasket.getPaymentInstruments();
+            collections.forEach(allPaymentInstruments, function (item) {
+                if (item.paymentMethod === 'CRED_PAYMENT') {
+                    currentBasket.removePaymentInstrument(item);
+                }
+            });
+        });
+    }
+    return next();
+});
 
 server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) {
-    var BasketMgr = require('dw/order/BasketMgr');
     var OrderMgr = require('dw/order/OrderMgr');
     var Resource = require('dw/web/Resource');
-    var Transaction = require('dw/system/Transaction');
     var URLUtils = require('dw/web/URLUtils');
     var basketCalculationHelpers = require('*/cartridge/scripts/helpers/basketCalculationHelpers');
     var hooksHelper = require('*/cartridge/scripts/helpers/hooks');
@@ -16,7 +33,6 @@ server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) 
     var credPaymentHelper = require('*/cartridge/scripts/checkout/credPaymentHelper');
     var validationHelpers = require('*/cartridge/scripts/helpers/basketValidationHelpers');
     var Site = require('dw/system/Site');
-    var collections = require('*/cartridge/scripts/util/collections');
     var isCredPayment = false;
 
     var currentBasket = BasketMgr.getCurrentBasket();
