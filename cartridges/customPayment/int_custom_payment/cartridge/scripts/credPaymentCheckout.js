@@ -98,8 +98,9 @@ function getPaymentRequest(order, paymentInstrument) {
     var itemsDetails = [];
     var fees = 0;
     for (var i = 0; i < order.allProductLineItems.length; i++) {
+        fees = 0;
         var productLineItem = order.allProductLineItems[i];
-        if (!(productLineItem.optionProductLineItem || productLineItem.bundledProductLineItem)) {
+        if (!(productLineItem.bundledProductLineItem)) {
             var productDetail = {};
             productDetail.Name = productLineItem.productName;
             productDetail.SKU = productLineItem.productID;
