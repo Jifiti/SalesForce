@@ -30,11 +30,11 @@
                 }
             }
         }
+
         iframe {
             background-color: white;
             height: 80vh;
-
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 768px) { // stylelint-disable-line
                 height: 93vh;
             }
         }

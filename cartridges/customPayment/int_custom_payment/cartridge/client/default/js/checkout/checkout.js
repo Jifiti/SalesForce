@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable  no-undef */
 'use strict';
 
 var customerHelpers = require('base/checkout/customer');
@@ -364,6 +366,7 @@ var scrollAnimate = require('base/components/scrollAnimate');
                                     defer.reject(data);
                                 }
                             } else {
+                                 /* eslint-disable no-lonely-if */
                                 if (data.credPaymentUrl) {
                                     if (data.windowBehavior === 'NewTab') {
                                         $('body').trigger('checkout:disableButton', '.next-step-button button');
