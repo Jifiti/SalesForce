@@ -4,6 +4,8 @@
 'use strict';
 
 var server = require('server');
+// CredPaymentController-CallBack endpoint called from the third party system (payment provider). Once the process finished on their side will give back the control to SFCC
+// using this get point
 // eslint-disable-next-line consistent-return
 server.get('CallBack', function (req, res, next) {
     var COHelpers = require('*/cartridge/scripts/checkout/checkoutHelpers');
@@ -19,7 +21,8 @@ server.get('CallBack', function (req, res, next) {
     var checkStatusService = require('*/cartridge/scripts/checkout/svc/checkStatusApi');
     var credPaymentService = require('*/cartridge/scripts/checkout/svc/credPaymentApi');
     var urlHelper = require('*/cartridge/scripts/helpers/urlHelpers');
-
+    var Order = require('dw/order/Order');
+    var paymentTransaction = require('dw/order/PaymentTransaction');
     var paymentError = true;
     var purchaseApiResult;
     var order = OrderMgr.getOrder(req.querystring.orderID);
@@ -72,10 +75,10 @@ server.get('CallBack', function (req, res, next) {
                                 if (paymentInstruments[i].paymentMethod === 'CRED_PAYMENT') {
                                     paymentInstruments[i].paymentTransaction.setTransactionID(purchaseApiRes.AuthId);
                                     if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
-                                        paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_CAPTURE);
-                                        order.setPaymentStatus(dw.order.Order.PAYMENT_STATUS_PAID);
+                                        paymentInstruments[i].paymentTransaction.setType(paymentTransaction.TYPE_CAPTURE);
+                                        order.setPaymentStatus(Order.PAYMENT_STATUS_PAID);
                                     } else {
-                                        paymentInstruments[i].paymentTransaction.setType(dw.order.PaymentTransaction.TYPE_AUTH);
+                                        paymentInstruments[i].paymentTransaction.setType(paymentTransaction.TYPE_AUTH);
                                     }
                                     paymentInstruments[i].custom.credPaymentResponse = purchaseApiResult.object.text;
                                 }
@@ -85,7 +88,7 @@ server.get('CallBack', function (req, res, next) {
                         if (order.getCustomerEmail()) {
                             COHelpers.sendConfirmationEmail(order, req.locale.id);
                         }
-                        res.redirect(URLUtils.url('credPaymentOrder-Confirm', 'ID', order.orderNo, 'token', order.orderToken).toString());
+                        res.redirect(URLUtils.url('CredPaymentOrder-Confirm', 'ID', order.orderNo, 'token', order.orderToken).toString());
                         return next();
                     }
                     paymentError = true;
@@ -111,7 +114,7 @@ server.get('CallBack', function (req, res, next) {
     }
     next();
 });
-
+ // Handle closeIframe to remove and remove the credPayment payment method.
 server.post('HandleCloseIframe', server.middleware.https, function (req, res, next) {
     var URLUtils = require('dw/web/URLUtils');
     var Transaction = require('dw/system/Transaction');

@@ -6,6 +6,8 @@ server.extend(module.superModule);
 var BasketMgr = require('dw/order/BasketMgr');
 var Transaction = require('dw/system/Transaction');
 var collections = require('*/cartridge/scripts/util/collections');
+// The CheckoutServices-SubmitPayment endpoint will submit the payment information and render the checkout place order page allowing the shopper to confirm and place the order
+// in the prepend we do a check to remove credpayment payment method to avoid some fails scenarios
 server.prepend('SubmitPayment', server.middleware.https, function (req, res, next) {
     var paymentForm = server.forms.getForm('billing');
     var paymentMethodIdValue = paymentForm.paymentMethod.value;
@@ -22,7 +24,7 @@ server.prepend('SubmitPayment', server.middleware.https, function (req, res, nex
     }
     return next();
 });
-
+// CheckoutServices-PlaceOrder : The CheckoutServices-PlaceOrder endpoint places the order
 server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) {
     var OrderMgr = require('dw/order/OrderMgr');
     var Resource = require('dw/web/Resource');

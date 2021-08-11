@@ -8,6 +8,7 @@ var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
 var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
 var csrfProtection = require('*/cartridge/scripts/middleware/csrf');
+// CredPaymentOrder-Confirm : This endpoint is invoked when the shopper's Order is Placed and Confirmed
 // eslint-disable-next-line consistent-return
 server.get(
     'Confirm',
