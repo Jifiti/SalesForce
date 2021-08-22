@@ -119,11 +119,14 @@ server.post('HandleCloseIframe', server.middleware.https, function (req, res, ne
     var URLUtils = require('dw/web/URLUtils');
     var Transaction = require('dw/system/Transaction');
     var OrderMgr = require('dw/order/OrderMgr');
+    var redirectUrl;
     var order = OrderMgr.getOrder(req.form.orderNo);
-    Transaction.wrap(function () {
-        OrderMgr.failOrder(order, true);
-    });
-    var redirectUrl = URLUtils.https('Checkout-Begin', 'stage', 'payment', 'paymentError', 'error', 'closeIframe', 'closeIframe').toString();
+    if (order) {
+        Transaction.wrap(function () {
+            OrderMgr.failOrder(order, true);
+        });
+    }
+    redirectUrl = URLUtils.https('Checkout-Begin', 'stage', 'payment', 'paymentError', 'error', 'closeIframe', 'closeIframe').toString();
     res.json({
         url: redirectUrl
     });
