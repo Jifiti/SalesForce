@@ -1,0 +1,63 @@
+@import "~base/bootstrap-custom-import";
+$browser-context: 16px;
+$mobile-breakpoint: 768px;
+
+@function px-to-rem($pixels, $context: $browser-context) { // eslint-disable-line
+    @if (unitless($pixels)) {
+        $pixels: $pixels * 1px;
+    }
+
+    @if (unitless($context)) {
+        $context: $context * 1px;
+    }
+
+    @return $pixels / $context * 1rem; // eslint-disable-line
+}
+
+.payment-error {
+    .modal-dialog {
+        max-width: px-to-rem(350px);
+
+        .modal-body {
+            button {
+                background-color: black;
+            }
+        }
+    }
+}
+
+.payment-modal {
+    .modal-dialog {
+        max-width: px-to-rem(1000px);
+
+        .modal-content {
+            background-color: transparent;
+
+            .modal-header {
+                padding-right: px-to-rem(12px);
+                padding-bottom: px-to-rem(12px);
+
+                .close {
+                    opacity: 1;
+                    padding: 0;
+
+                    .icon-close {
+                        width: px-to-rem(24px);
+                        height: px-to-rem(24px);
+                        background-image: url("../images/icon-close.svg");
+                        background-repeat: no-repeat;
+                    }
+                }
+            }
+
+            iframe {
+                background-color: white;
+                height: 80vh;
+
+                @media screen and (max-width: $mobile-breakpoint) {
+                    height: 93vh;
+                }
+            }
+        }
+    }
+}
