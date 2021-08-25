@@ -5,7 +5,7 @@ const Spy = require('../../../helpers/unit/Spy');
 let spy = new Spy();
 
 function proxyModel() {
-    var checkoutHelpers = proxyquire('../../../../cartridges/customPayment/int_custom_payment/cartridge/scripts/checkout/credPaymentHelper', {
+    var checkoutHelpers = proxyquire('../../../../cartridges/int_custompayment_sfra/cartridge/scripts/checkout/credPaymentHelper', {
         'dw/util/ArrayList': require('../../dw/dw_util_ArrayList'),
         'dw/value/Money': require('../../dw/dw_value_Money'),
         'dw/order/OrderMgr': require('../../dw/dw_order_OrderMgr'),

@@ -7,7 +7,7 @@ var ExtractTextPlugin = require('sgmf-scripts')['extract-text-webpack-plugin'];
 const shell = require('shelljs');
 const cwd = process.cwd();
 
-const UICartridges = ['app_storefront_base','int_custom_payment'];
+const UICartridges = ['app_storefront_base','int_custompayment_sfra'];
 
 var jsFiles = () => {
     const result = {};

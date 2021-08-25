@@ -10,7 +10,7 @@ global.empty = (data) => {
     return !data;
 };
 
-describe('cutomPayment/int_custom_payment/cartridge/scripts/checkout/credPaymentHelpers test', () => {
+describe('int_custompayment_sfra/cartridge/scripts/checkout/credPaymentHelpers test', () => {
     let checkoutHelpers = require('../../../mocks/scripts/checkout/credPaymentHelpers');
 
     it('Testing method: handlePayments', () => {

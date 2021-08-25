@@ -17,7 +17,7 @@ var paymentFormMock = {
 };
 
 describe('basic credit form processor', function () {
-    var creditFormProcessor = proxyquire('../../../../../../../cartridges/customPayment/int_custom_payment/cartridge/scripts/hooks/payment/processor/credpayment_form_processor', {
+    var creditFormProcessor = proxyquire('../../../../../../../cartridges/int_custompayment_sfra/cartridge/scripts/hooks/payment/processor/credpayment_form_processor', {
     });
     describe('processForm', function () {
         it('Should process the Cred Payment form for a logged in user', function () {
