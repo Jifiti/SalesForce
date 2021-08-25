@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/modal.css')}" />
+<!-- Modal -->
+<div class="modal fade payment-modal px-2" id="paymentModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content border-0">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-ordertoken="" data-orderno="" data-failorder="${URLUtils.url('CredPaymentController-HandleCloseIframe')}" data-errormessage="${Resource.msg('msg.credpayment.error', 'credPayment', null)}">
+          <span aria-hidden="true" class="icon-close d-inline-block"></span>
+        </button>
+      </div>
+      <div class="modal-body p-0">
+              <iframe src=""  frameborder="0"  width="100%"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade payment-error" id="paymentError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered text-center" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="font-weight-bold mb-2"> ${Resource.msg('msg.credpayment.error.firstpart', 'credPayment', null)}</div>
+        <p> ${Resource.msg('msg.credpayment.error.secondpart', 'credPayment', null)}</p>
+        <button type="button" class="btn btn-secondary px-5" data-dismiss="modal"> ${Resource.msg('msg.error.button', 'credPayment', null)}</button>
+      </div>
+    </div>
+  </div>
+</div>
