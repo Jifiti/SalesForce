@@ -56,7 +56,7 @@ describe('CheckoutServices-PlaceOrder', function () {
             pass
         }
     };
-    it('Checkout-Begin', function () {
+    it('CheckoutServices-PlaceOrder', function () {
         myRequest.url = config.baseUrl + '/CheckoutServices-PlaceOrder';
         myRequest.method = 'POST';
 

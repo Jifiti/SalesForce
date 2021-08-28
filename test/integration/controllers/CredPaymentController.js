@@ -25,7 +25,7 @@ describe('CredPaymentController-HandleCloseIframe', function () {
         }
     };
 
-    it('Checkout-Begin', function () {
+    it('CredPaymentController-HandleCloseIframe', function () {
         myRequest.url = config.baseUrl + '/CredPaymentController-HandleCloseIframe';
         myRequest.method = 'POST';
 
