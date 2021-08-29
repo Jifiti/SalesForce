@@ -3,5 +3,7 @@ coverage/
 doc/
 bin/
 codecept.conf.js
-test/
+custompaymenttest/
 webpack.config.js
+bm_app_storefront_base
+app_storefront_base
