@@ -10,6 +10,8 @@
     "test": "sgmf-scripts --test test/unit/**/*.js",
     "cover": "sgmf-scripts --cover 'test/unit'",
     "test:integration": "sgmf-scripts --integration 'test/integration/**/*.js'",
+    "test:custompayment": "sgmf-scripts --test custompaymenttest/unit/**/*.js",
+    "test:integration:custompayment": "sgmf-scripts --integration 'custompaymenttest/integration/**/*.js'",
     "test:acceptance:custom": "npx codeceptjs run --plugins retryFailedStep --profile",
     "test:acceptance:deep": "npx codeceptjs run --plugins retryFailedStep --grep '(?=.*)^(?!.*@mobile)^(?!.*@tablet)^(?!.*@pageDesigner)' --profile",
     "test:acceptance:smoke": "npx codeceptjs run --plugins retryFailedStep --grep @happyPath --profile",
