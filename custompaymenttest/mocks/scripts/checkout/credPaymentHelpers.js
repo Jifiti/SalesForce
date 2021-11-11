@@ -1,7 +1,7 @@
 'use strict';
 
 var proxyquire = require('proxyquire').noCallThru().noPreserveCache();
-const Spy = require('../../../helpers/unit/Spy');
+const Spy = require('../../../helpers/unit/spy');
 let spy = new Spy();
 
 function proxyModel() {

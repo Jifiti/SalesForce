@@ -5,15 +5,13 @@
         <enabled-flag>true</enabled-flag>
         <processor-id>CRED_PAYMENT</processor-id>
         <custom-attributes>
-            <custom-attribute attribute-id="longDescription">&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-
-&lt;div style="direction: ltr;"&gt;Click 'Place Order' and start your application.&lt;/div&gt;
-
-&lt;div style="direction: ltr;"&gt;&amp;nbsp;&lt;/div&gt;
-
-&lt;div style="direction: ltr;"&gt;Once you complete the application process you will be redirected to order confirmation page and receive a confirmation email.&lt;br /&gt;
-No need to do anything further. your order will be processed and sent to you!&lt;/div&gt;
-</custom-attribute>
+            <custom-attribute attribute-id="longDescription">
+                {
+                    "title":"Click 'Place Order' and start your application.",
+                    "paragraphs":["Once you complete the application process you will be redirected to order confirmation page and receive a confirmation email.","No need to do anything further. your order will be processed and sent to you!"
+                      ]
+                }
+        </custom-attribute>
         </custom-attributes>
     </payment-method>
 </payment-settings>

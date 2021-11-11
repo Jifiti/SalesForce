@@ -17,7 +17,7 @@ function applicablePaymentMethods(paymentMethods) {
             ID: method.ID,
             name: method.name,
             description: method.description,
-            longDescription: method.custom.longDescription
+            longDescription: method.custom.longDescription ? JSON.parse(method.custom.longDescription) : ''
         };
     });
 }

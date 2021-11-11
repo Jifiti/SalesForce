@@ -1,6 +1,6 @@
 {
   "name": "custompayment",
-  "version": "6.0.0",
+  "version": "21.1.0",
   "description": "custom payment",
   "main": "index.js",
   "engines": {

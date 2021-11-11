@@ -14,7 +14,7 @@ function proxyModel() {
                         name: 'Gift Certificate',
                         description: 'description for Gift Certificate',
                         custom: {
-                            longDescription: 'long description for Gift Certificate'
+                            longDescription: '{"title":"long description for Gift Certificate"}'
                         }
                     },
                     {
@@ -22,7 +22,7 @@ function proxyModel() {
                         name: 'Credit Card',
                         description: 'description for Credit Card',
                         custom: {
-                            longDescription: 'long description for Credit Card'
+                            longDescription: '{"title":"long description for Credit Card"}'
                         }
                     },
                     {
@@ -30,8 +30,8 @@ function proxyModel() {
                         name: 'CRED Payment',
                         description: 'description for Cred payment',
                         custom: {
-                            longDescription: 'long description for CRED Payment'
-                        }
+                                longDescription: '{"title":"long description for  Cred payment"}'
+                            }
                     }
                 ];
             },
