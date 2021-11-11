@@ -6,21 +6,24 @@ server.extend(module.superModule);
 var BasketMgr = require('dw/order/BasketMgr');
 var Transaction = require('dw/system/Transaction');
 var collections = require('*/cartridge/scripts/util/collections');
+var csrfProtection = require('*/cartridge/scripts/middleware/csrf');
 // The CheckoutServices-SubmitPayment endpoint will submit the payment information and render the checkout place order page allowing the shopper to confirm and place the order
 // in the prepend we do a check to remove credpayment payment method to avoid some failed scenarios
-server.prepend('SubmitPayment', server.middleware.https, function (req, res, next) {
-    var paymentForm = server.forms.getForm('billing');
-    var paymentMethodIdValue = paymentForm.paymentMethod.value;
-    if (paymentMethodIdValue !== 'CRED_PAYMENT') {
-        var currentBasket = BasketMgr.getCurrentBasket();
-        Transaction.wrap(function () {
-            var allPaymentInstruments = currentBasket.getPaymentInstruments();
-            collections.forEach(allPaymentInstruments, function (item) {
-                if (item.paymentMethod === 'CRED_PAYMENT') {
-                    currentBasket.removePaymentInstrument(item);
-                }
+server.prepend('SubmitPayment', server.middleware.https, csrfProtection.validateAjaxRequest, function (req, res, next) {
+    if (dw.system.Site.getCurrent().getCustomPreferenceValue('isJifitiEnabled')) {
+        var paymentForm = server.forms.getForm('billing');
+        var paymentMethodIdValue = paymentForm.paymentMethod.value;
+        if (paymentMethodIdValue !== 'CRED_PAYMENT') {
+            var currentBasket = BasketMgr.getCurrentBasket();
+            Transaction.wrap(function () {
+                var allPaymentInstruments = currentBasket.getPaymentInstruments();
+                collections.forEach(allPaymentInstruments, function (item) {
+                    if (item.paymentMethod === 'CRED_PAYMENT') {
+                        currentBasket.removePaymentInstrument(item);
+                    }
+                });
             });
-        });
+        }
     }
     return next();
 });
@@ -197,7 +200,7 @@ server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) 
         this.emit('route:Complete', req, res);
         return;
     }
-    if (handlePaymentResult.credPaymentRedirectUrl) {
+    if (dw.system.Site.getCurrent().getCustomPreferenceValue('isJifitiEnabled') && order.getPaymentInstruments('CRED_PAYMENT').length > 0 && handlePaymentResult.credPaymentRedirectUrl) {
         var windowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value;
 
         res.json({

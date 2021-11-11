@@ -12,8 +12,8 @@
             </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
-            <attribute-group group-id="CredPayment">
-                <display-name xml:lang="x-default">CredPayment</display-name>
+            <attribute-group group-id="jifitiPayment">
+                <display-name xml:lang="x-default">JifitiPayment</display-name>
                 <attribute attribute-id="credPaymentResponse"/>
             </attribute-group>
         </group-definitions>
@@ -175,10 +175,16 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="isJifitiEnabled">
+                <display-name xml:lang="x-default">isJifitiEnabled</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
-            <attribute-group group-id="CredPayment">
-                <display-name xml:lang="x-default">CredPayment</display-name>
+            <attribute-group group-id="jifitiPayment">
+                <display-name xml:lang="x-default">JifitiPayment</display-name>
                 <attribute attribute-id="credPaymentToken"/>
                 <attribute attribute-id="lenderId"/>
                 <attribute attribute-id="merchantId"/>
@@ -193,6 +199,7 @@
                 <attribute attribute-id="checkAccountStatusApi"/>
                 <attribute attribute-id="PurchaseApi"/>
                 <attribute attribute-id="initiateFlowApi"/>
+                <attribute attribute-id="isJifitiEnabled"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
@@ -214,8 +221,8 @@
             </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
-            <attribute-group group-id="CredPayment">
-                <display-name xml:lang="x-default">Cred Payment Attributes</display-name>
+            <attribute-group group-id="JifitiPayment">
+                <display-name xml:lang="x-default">Jifiti Payment Attributes</display-name>
                 <attribute attribute-id="referenceId"/>
                 <attribute attribute-id="orderToken"/>
             </attribute-group>
@@ -225,15 +232,14 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="longDescription">
                 <display-name xml:lang="x-default">Long Description</display-name>
-                <type>html</type>
-                <localizable-flag>false</localizable-flag>
+                <type>text</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
-            <attribute-group group-id="CredPayment">
-                <display-name xml:lang="x-default">CredPayment</display-name>
+            <attribute-group group-id="JifitiPayment">
+                <display-name xml:lang="x-default">JifitiPayment</display-name>
                 <attribute attribute-id="longDescription"/>
             </attribute-group>
         </group-definitions>

@@ -1,4 +1,6 @@
 <div class="tab-pane cred-payment-content" id="cred-payment-content" role="tabpanel">
+<isset name="longDescription" value="${paymentOption.longDescription}" scope="page" />
+
     <fieldset class="payment-form-fields">
 
         <input type="hidden" class="form-control"
@@ -6,5 +8,14 @@
                value="CRED_PAYMENT"
         >
     </fieldset>
-     <isprint value="${paymentOption.longDescription}" encoding="off" />
+    <isif condition="${longDescription.title}">
+        <div>${longDescription.title}</div>
+     </isif>
+     <br>
+    <isif condition="${longDescription.paragraphs.length > 0}">
+    <isloop items="${longDescription.paragraphs}" var="paragraph" status="loopstatus">
+        <div>${paragraph}</div>
+    </isloop>
+    </isif>
+
 </div>

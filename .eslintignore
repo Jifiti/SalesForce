@@ -7,3 +7,6 @@ custompaymenttest/
 webpack.config.js
 bm_app_storefront_base
 app_storefront_base
+test/
+modules
+ismllinter.config.js

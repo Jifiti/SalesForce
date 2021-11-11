@@ -10,7 +10,7 @@ var paymentMethods = new ArrayList([
         name: 'Gift Certificate',
         description: 'description for Gift Certificate',
         custom: {
-            longDescription: 'long description for Gift Certificate'
+            longDescription: '{"title":"long description for Gift Certificate"}'
         }
     },
     {
@@ -18,7 +18,7 @@ var paymentMethods = new ArrayList([
         name: 'Credit Card',
         description: 'description for Credit Card',
         custom: {
-            longDescription: 'long description for Credit Card'
+            longDescription: '{"title":"long description for Credit Card"}'
         }
     },
     {
@@ -26,7 +26,7 @@ var paymentMethods = new ArrayList([
         name: 'CRED Payment',
         description: 'description for Cred payment',
         custom: {
-            longDescription: 'long description for Cred payment'
+            longDescription: '{"title":"long description for  Cred payment"}'
         }
     }
 ]);
