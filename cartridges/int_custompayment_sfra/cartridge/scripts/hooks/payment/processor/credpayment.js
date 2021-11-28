@@ -72,7 +72,7 @@ function Authorize(orderNumber, paymentInstrument, paymentProcessor, orderToken)
     var svc = credPaymentService.credPaymentSendPaymentRequest();
     var params = {};
     params.paymentRequest = paymentRequest;
-    params.URL = Site.current.getCustomPreferenceValue('initiateFlowApi');
+    params.URL = Site.current.getCustomPreferenceValue('jifitiinitiateFlowApi');
     var result = svc.call(params);
     var errorMessages = [];
     var credPaymentRedirectUrl;
@@ -82,7 +82,7 @@ function Authorize(orderNumber, paymentInstrument, paymentProcessor, orderToken)
         if (resultObj.RedirectURL) {
             credPaymentRedirectUrl = resultObj.RedirectURL;
             Transaction.wrap(function () {
-                order.custom.referenceId = resultObj.ReferenceId;
+                order.custom.jifitiReferenceId = resultObj.ReferenceId;
             });
         } else {
             error = false;

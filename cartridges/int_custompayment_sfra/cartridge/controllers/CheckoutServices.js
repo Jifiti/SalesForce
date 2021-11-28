@@ -201,7 +201,7 @@ server.prepend('PlaceOrder', server.middleware.https, function (req, res, next) 
         return;
     }
     if (dw.system.Site.getCurrent().getCustomPreferenceValue('isJifitiEnabled') && order.getPaymentInstruments('CRED_PAYMENT').length > 0 && handlePaymentResult.credPaymentRedirectUrl) {
-        var windowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value;
+        var windowBehavior = Site.current.getCustomPreferenceValue('jifitiwindowBehavior').value;
 
         res.json({
             error: false,
