@@ -2,13 +2,13 @@
 <preferences xmlns="http://www.demandware.com/xml/impex/preferences/2007-03-31">
     <custom-preferences>
         <all-instances>
-            <preference preference-id="CompletionMethod">TransferCard</preference>
-            <preference preference-id="SourceChannel">Online</preference>
-            <preference preference-id="callBackURL">https://zyaf-001.sandbox.us01.dx.commercecloud.salesforce.com/on/demandware.store/Sites-RefArch-Site/en_US/CredPaymentController-CallBack</preference>
+            <preference preference-id="jifitiCompletionMethod">TransferCard</preference>
+            <preference preference-id="jifitiSourceChannel">Online</preference>
+            <preference preference-id="jifiticallBackURL">https://zyaf-001.sandbox.us01.dx.commercecloud.salesforce.com/on/demandware.store/Sites-RefArch-Site/en_US/CredPaymentController-CallBack</preference>
             <preference preference-id="credPaymentToken">cred payment token</preference>
-            <preference preference-id="lenderId">lenderId</preference>
-            <preference preference-id="merchantId">merchantId</preference>
-            <preference preference-id="productTypes">
+            <preference preference-id="jifitilenderId">lenderId</preference>
+            <preference preference-id="jifitimerchantId">merchantId</preference>
+            <preference preference-id="jifitiproductTypes">
                 <value>CO</value>
                 <value>LC</value>
                 <value>NaN</value>
@@ -20,13 +20,14 @@
                 <value>OTLOnline</value>
                 <value>_3xCB</value>
             </preference>
-            <preference preference-id="sourcePageType">Checkout</preference>
-            <preference preference-id="storeId">Tel Aviv</preference>
-            <preference preference-id="windowBehavior">SameTab</preference>
-            <preference preference-id="paymentTransactionType">Capture</preference>
-            <preference preference-id="checkAccountStatusApi">applications/v2/CheckAccountStatus</preference>
-            <preference preference-id="initiateFlowApi">applications/v2/InitiateFlow</preference>
-            <preference preference-id="PurchaseApi">purchases/v2/Authorize</preference>
+            <preference preference-id="jifitisourcePageType">Checkout</preference>
+            <preference preference-id="jifitistoreId">Tel Aviv</preference>
+            <preference preference-id="jifitiwindowBehavior">SameTab</preference>
+            <preference preference-id="jifitipaymentTransactionType">Capture</preference>
+            <preference preference-id="jifiticheckAccountStatusApi">applications/v2/CheckAccountStatus</preference>
+            <preference preference-id="jifitiinitiateFlowApi">applications/v2/InitiateFlow</preference>
+            <preference preference-id="jifitiPurchaseApi">purchases/v2/Authorize</preference>
+            <preference preference-id="isJifitiEnabled">true</preference>
         </all-instances>
         <development/>
         <staging/>

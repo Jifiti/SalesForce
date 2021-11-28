@@ -21,7 +21,7 @@
 
     <type-extension type-id="SitePreferences">
         <custom-attribute-definitions>
-            <attribute-definition attribute-id="CompletionMethod">
+            <attribute-definition attribute-id="jifitiCompletionMethod">
                 <display-name xml:lang="x-default">CompletionMethod</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>true</mandatory-flag>
@@ -41,7 +41,7 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
-            <attribute-definition attribute-id="SourceChannel">
+            <attribute-definition attribute-id="jifitiSourceChannel">
                 <display-name xml:lang="x-default">SourceChannel</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>true</mandatory-flag>
@@ -57,7 +57,7 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
-            <attribute-definition attribute-id="callBackURL">
+            <attribute-definition attribute-id="jifiticallBackURL">
                 <display-name xml:lang="x-default">callBackURL</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
@@ -71,27 +71,27 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="lenderId">
+            <attribute-definition attribute-id="jifitilenderId">
                 <display-name xml:lang="x-default">LenderId</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="merchantId">
+            <attribute-definition attribute-id="jifitimerchantId">
                 <display-name xml:lang="x-default">MerchantId</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="productTypes">
+            <attribute-definition attribute-id="jifitiproductTypes">
                 <display-name xml:lang="x-default">productTypes</display-name>
                 <type>set-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
-            <attribute-definition attribute-id="sourcePageType">
+            <attribute-definition attribute-id="jifitisourcePageType">
                 <display-name xml:lang="x-default">SourcePageType</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>true</mandatory-flag>
@@ -115,14 +115,14 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
-            <attribute-definition attribute-id="storeId">
+            <attribute-definition attribute-id="jifitistoreId">
                 <display-name xml:lang="x-default">StoreId</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="windowBehavior">
+            <attribute-definition attribute-id="jifitiwindowBehavior">
                 <display-name xml:lang="x-default">WindowBehavior</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>true</mandatory-flag>
@@ -138,7 +138,7 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
-            <attribute-definition attribute-id="paymentTransactionType">
+            <attribute-definition attribute-id="jifitipaymentTransactionType">
                 <display-name xml:lang="x-default">Payment Transaction Type</display-name>
                 <type>enum-of-string</type>
                 <mandatory-flag>true</mandatory-flag>
@@ -154,21 +154,21 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
-            <attribute-definition attribute-id="PurchaseApi">
+            <attribute-definition attribute-id="jifitiPurchaseApi">
                 <display-name xml:lang="x-default">PurchaseApi</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="checkAccountStatusApi">
+            <attribute-definition attribute-id="jifiticheckAccountStatusApi">
                 <display-name xml:lang="x-default">checkAccountStatusApi</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="initiateFlowApi">
+            <attribute-definition attribute-id="jifitiinitiateFlowApi">
                 <display-name xml:lang="x-default">initiateFlowApi</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
@@ -186,19 +186,19 @@
             <attribute-group group-id="jifitiPayment">
                 <display-name xml:lang="x-default">JifitiPayment</display-name>
                 <attribute attribute-id="credPaymentToken"/>
-                <attribute attribute-id="lenderId"/>
-                <attribute attribute-id="merchantId"/>
-                <attribute attribute-id="storeId"/>
-                <attribute attribute-id="callBackURL"/>
-                <attribute attribute-id="productTypes"/>
-                <attribute attribute-id="sourcePageType"/>
-                <attribute attribute-id="SourceChannel"/>
-                <attribute attribute-id="CompletionMethod"/>
-                <attribute attribute-id="windowBehavior"/>
-                <attribute attribute-id="paymentTransactionType"/>
-                <attribute attribute-id="checkAccountStatusApi"/>
-                <attribute attribute-id="PurchaseApi"/>
-                <attribute attribute-id="initiateFlowApi"/>
+                <attribute attribute-id="jifitilenderId"/>
+                <attribute attribute-id="jifitimerchantId"/>
+                <attribute attribute-id="jifitistoreId"/>
+                <attribute attribute-id="jifiticallBackURL"/>
+                <attribute attribute-id="jifitiproductTypes"/>
+                <attribute attribute-id="jifitisourcePageType"/>
+                <attribute attribute-id="jifitiSourceChannel"/>
+                <attribute attribute-id="jifitiCompletionMethod"/>
+                <attribute attribute-id="jifitiwindowBehavior"/>
+                <attribute attribute-id="jifitipaymentTransactionType"/>
+                <attribute attribute-id="jifiticheckAccountStatusApi"/>
+                <attribute attribute-id="jifitiPurchaseApi"/>
+                <attribute attribute-id="jifitiinitiateFlowApi"/>
                 <attribute attribute-id="isJifitiEnabled"/>
             </attribute-group>
         </group-definitions>
@@ -212,7 +212,7 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="referenceId">
+            <attribute-definition attribute-id="jifitiReferenceId">
                 <display-name xml:lang="x-default">ReferenceId</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
@@ -223,7 +223,7 @@
         <group-definitions>
             <attribute-group group-id="JifitiPayment">
                 <display-name xml:lang="x-default">Jifiti Payment Attributes</display-name>
-                <attribute attribute-id="referenceId"/>
+                <attribute attribute-id="jifitiReferenceId"/>
                 <attribute attribute-id="orderToken"/>
             </attribute-group>
         </group-definitions>

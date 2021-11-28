@@ -27,14 +27,14 @@ server.get('CallBack', function (req, res, next) {
     var purchaseApiResult;
     var order = OrderMgr.getOrder(req.querystring.orderID, req.querystring.orderToken);
     var token = req.querystring.token;
-    var windowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value;
+    var windowBehavior = Site.current.getCustomPreferenceValue('jifitiwindowBehavior').value;
     if (order && order.custom.orderToken === token) {
         var svc = checkStatusService.sendCheckStatusRequest();
-        var refID = order.custom.referenceId;
+        var refID = order.custom.jifitiReferenceId;
         var params = {};
         var parameters = {};
         parameters.ReferenceId = refID;
-        params.URL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('checkAccountStatusApi'), parameters);
+        params.URL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('jifiticheckAccountStatusApi'), parameters);
         var result = svc.call(params);
         if (result.ok) {
             var resultObj = JSON.parse(result.object.text);
@@ -51,11 +51,11 @@ server.get('CallBack', function (req, res, next) {
                 authRequest.Currency = order.getCurrencyCode();
                 var issueCards = resultObj.IssuedCards;
                 authRequest.CardId = issueCards[0].Card.CardId;
-                authRequest.MerchantId = Site.current.getCustomPreferenceValue('merchantId');
+                authRequest.MerchantId = Site.current.getCustomPreferenceValue('jifitimerchantId');
                 svc = credPaymentService.credPaymentSendPaymentRequest();
                 params = {};
-                params.URL = Site.current.getCustomPreferenceValue('PurchaseApi');
-                if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
+                params.URL = Site.current.getCustomPreferenceValue('jifitiPurchaseApi');
+                if (Site.current.getCustomPreferenceValue('jifitipaymentTransactionType').value === 'Capture') {
                     authRequest.InstantCommit = true;
                 } else {
                     authRequest.InstantCommit = false;
@@ -74,7 +74,7 @@ server.get('CallBack', function (req, res, next) {
                             for (var i = 0; i < paymentInstruments.length; i++) {
                                 if (paymentInstruments[i].paymentMethod === 'CRED_PAYMENT') {
                                     paymentInstruments[i].paymentTransaction.setTransactionID(purchaseApiRes.AuthId);
-                                    if (Site.current.getCustomPreferenceValue('paymentTransactionType').value === 'Capture') {
+                                    if (Site.current.getCustomPreferenceValue('jifitipaymentTransactionType').value === 'Capture') {
                                         paymentInstruments[i].paymentTransaction.setType(paymentTransaction.TYPE_CAPTURE);
                                         order.setPaymentStatus(Order.PAYMENT_STATUS_PAID);
                                     } else {

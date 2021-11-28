@@ -12,9 +12,9 @@ function getPaymentRequest(order, paymentInstrument) {
     var Transaction = require('dw/system/Transaction');
     var UUIDUtils = require('dw/util/UUIDUtils');
     var Site = require('dw/system/Site');
-    var lenderId = Site.current.getCustomPreferenceValue('lenderId');
-    var merchantId = Site.current.getCustomPreferenceValue('merchantId');
-    var storeId = Site.current.getCustomPreferenceValue('storeId');
+    var lenderId = Site.current.getCustomPreferenceValue('jifitilenderId');
+    var merchantId = Site.current.getCustomPreferenceValue('jifitimerchantId');
+    var storeId = Site.current.getCustomPreferenceValue('jifitistoreId');
     var urlHelper = require('*/cartridge/scripts/helpers/urlHelpers');
     var ArrayList = require('dw/util/ArrayList');
     var paymentReq = {};
@@ -29,7 +29,7 @@ function getPaymentRequest(order, paymentInstrument) {
     parameters.orderID = orderNo;
     parameters.token = token;
     parameters.orderToken = order.getOrderToken();
-    var callBackURL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('callBackURL'), parameters);
+    var callBackURL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('jifiticallBackURL'), parameters);
     var customerEmail = order.getCustomerEmail();
     var customerdetail = {};
     var billingAddressDetail = {};
@@ -87,10 +87,10 @@ function getPaymentRequest(order, paymentInstrument) {
 
     paymentReq.RequestedAmount = ammount;
     paymentReq.Currency = currencyCode;
-    paymentReq.SourcePageType = Site.current.getCustomPreferenceValue('sourcePageType').value;
+    paymentReq.SourcePageType = Site.current.getCustomPreferenceValue('jifitisourcePageType').value;
     paymentReq.CallbackURL = callBackURL;
     paymentReq.NotificationAPIURL = '';
-    var productTypesValues = Site.current.getCustomPreferenceValue('productTypes');
+    var productTypesValues = Site.current.getCustomPreferenceValue('jifitiproductTypes');
     var productTypesList = new ArrayList(productTypesValues);
     var productTypes = productTypesList.toArray();
     paymentReq.AllowedProductTypes = productTypes;
@@ -161,9 +161,9 @@ function getPaymentRequest(order, paymentInstrument) {
         itemsDetails.push(priceAdjustDetail);
     }
     paymentReq.Items = itemsDetails;
-    paymentReq.SourceChannel = Site.current.getCustomPreferenceValue('SourceChannel').value;
-    paymentReq.CompletionMethod = Site.current.getCustomPreferenceValue('CompletionMethod').value;
-    paymentReq.WindowBehavior = Site.current.getCustomPreferenceValue('windowBehavior').value;
+    paymentReq.SourceChannel = Site.current.getCustomPreferenceValue('jifitiSourceChannel').value;
+    paymentReq.CompletionMethod = Site.current.getCustomPreferenceValue('jifitiCompletionMethod').value;
+    paymentReq.WindowBehavior = Site.current.getCustomPreferenceValue('jifitiwindowBehavior').value;
     paymentReq.OrderId = orderNo;
 
     return paymentReq;
