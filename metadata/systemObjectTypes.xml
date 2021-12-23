@@ -181,6 +181,35 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="enableCertInPDP">
+                <display-name xml:lang="x-default">enableCertInPDP</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableCertInPLP">
+                <display-name xml:lang="x-default">enableCertInPLP</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="enableCertInCart">
+                <display-name xml:lang="x-default">enableCertInCart</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="jifitiWidgetLibraryURL">
+                <display-name xml:lang="x-default">jifitiWidgetLibraryURL</display-name>
+                <description xml:lang="x-default">link to jifiti-widget.min.js library</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="jifitiPayment">
@@ -200,6 +229,13 @@
                 <attribute attribute-id="jifitiPurchaseApi"/>
                 <attribute attribute-id="jifitiinitiateFlowApi"/>
                 <attribute attribute-id="isJifitiEnabled"/>
+            </attribute-group>
+            <attribute-group group-id="certMessaging">
+                <display-name xml:lang="x-default">certMessaging</display-name>
+                <attribute attribute-id="jifitiWidgetLibraryURL"/>
+                <attribute attribute-id="enableCertInPDP"/>
+                <attribute attribute-id="enableCertInPLP"/>
+                <attribute attribute-id="enableCertInCart"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

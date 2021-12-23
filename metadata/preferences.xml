@@ -28,6 +28,10 @@
             <preference preference-id="jifitiinitiateFlowApi">applications/v2/InitiateFlow</preference>
             <preference preference-id="jifitiPurchaseApi">purchases/v2/Authorize</preference>
             <preference preference-id="isJifitiEnabled">true</preference>
+            <preference preference-id="enableCertInCart">true</preference>
+            <preference preference-id="enableCertInPDP">true</preference>
+            <preference preference-id="enableCertInPLP">true</preference>
+            <preference preference-id="jifitiWidgetLibraryURL">https://toolbox-dev.jifiti.com/Widgets/1.0.3/jifiti-widget.min.js</preference>
         </all-instances>
         <development/>
         <staging/>
