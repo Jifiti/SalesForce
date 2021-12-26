@@ -36,10 +36,16 @@ function handleRefinements($results) {
     updateDom($results, '.refinements');
 }
 
+/**
+* Parse Ajax results and updated select DOM elements
+*
+* @param {string} response - Ajax response HTML code
+* @return {undefined}
+*/
 function parseResults(response) {
     var $results = $(response);
     var specialHandlers = {
-        '.refinements': handleRefinements,
+        '.refinements': handleRefinements
     };
 
     // Update DOM elements that do not require special handling
@@ -49,7 +55,7 @@ function parseResults(response) {
         '.header.page-title',
         '.product-grid',
         '.show-more',
-        '.filter-bar',
+        '.filter-bar'
     ].forEach(function (selector) {
         updateDom($results, selector);
     });
@@ -79,7 +85,7 @@ base.sort = function () {
             },
             error: function () {
                 $.spinner().stop();
-            },
+            }
         });
     });
 };
@@ -99,7 +105,7 @@ base.applyFilter = function () {
                 url: $(this).data('href'),
                 data: {
                     page: $('.grid-footer').data('page-number'),
-                    selectedUrl: $(this).data('href'),
+                    selectedUrl: $(this).data('href')
                 },
                 method: 'GET',
                 success: function (response) {
@@ -111,7 +117,7 @@ base.applyFilter = function () {
                 },
                 error: function () {
                     $.spinner().stop();
-                },
+                }
             });
         }
     );
