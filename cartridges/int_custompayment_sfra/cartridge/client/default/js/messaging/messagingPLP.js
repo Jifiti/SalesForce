@@ -4,7 +4,7 @@
  * Where jifiti is enabled and if it also enabled in PLP
  * @returns {boolean} is jifiti enabled
  */
-function _isJifitiEnabledForPLP() {
+function isJifitiEnabledForPLP() {
     return (
         $('input#isJifitiEnabled').val() === 'true' &&
         $('input#enableCertInPLP').val() === 'true'
@@ -15,7 +15,7 @@ function _isJifitiEnabledForPLP() {
  *
  * @param {HTMLElement} elem is the element to attach a jifiti component to
  */
-function _mountJifiti(elem) {
+function mountJifiti(elem) {
     try {
         var price = parseFloat($(elem).find('.sales .value').attr('content'));
 
@@ -26,11 +26,11 @@ function _mountJifiti(elem) {
                 price: price,
                 templateName: 'minFinancing',
                 flow: 'initiateFlow',
-                sourcepage: 'product',
+                sourcepage: 'product'
             });
         }
     } catch (e) {
-        console.log('mm', e);
+        console.log('mm', e); // eslint-disable-line no-console
     }
 }
 
@@ -38,7 +38,7 @@ function _mountJifiti(elem) {
  *
  * @param {HTMLElement} elem is the element to unattach the jifiti component from
  */
-function _unmountJifiti(elem) {
+function unmountJifiti(elem) {
     var id = $(elem).find('.mount-jifiti-here').attr('id');
     if (id) {
         window.OfferByPrice.destroy(id);
@@ -46,7 +46,7 @@ function _unmountJifiti(elem) {
 }
 
 module.exports.init = function () {
-    if (!_isJifitiEnabledForPLP()) {
+    if (!isJifitiEnabledForPLP()) {
         return;
     }
 
@@ -59,30 +59,30 @@ module.exports.init = function () {
     $('.product-grid')
         .find('.product-tile')
         .each(function () {
-            _mountJifiti(this);
+            mountJifiti(this);
         });
 };
 
 module.exports.mountJifiti = function () {
-    if (!_isJifitiEnabledForPLP()) {
+    if (!isJifitiEnabledForPLP()) {
         return;
     }
 
     $('.product-grid')
         .find('.product-tile')
         .each(function () {
-            _mountJifiti(this);
+            mountJifiti(this);
         });
 };
 
 module.exports.unmountJifiti = function () {
-    if (!_isJifitiEnabledForPLP()) {
+    if (!isJifitiEnabledForPLP()) {
         return;
     }
 
     $('.product-grid')
         .find('.product-tile')
         .each(function () {
-            _unmountJifiti(this);
+            unmountJifiti(this);
         });
 };
