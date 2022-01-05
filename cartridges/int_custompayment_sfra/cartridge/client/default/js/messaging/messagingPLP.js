@@ -19,7 +19,7 @@ function isJifitiEnabledForPLP() {
  */
 function mountJifiti(elem) {
     try {
-        var price = parseFloat($(elem).find('.sales .value').attr('content'));
+        var price = certUtils.getPrice($(elem).find('.tile-body').data('price'));
 
         if (price) {
             var id = $(elem).find('.mount-jifiti-here').attr('id');
@@ -65,14 +65,15 @@ function mountCertInQuickView() {
 module.exports.init = function () {
     if (!window.OfferByPrice) {
         var intervalId = setInterval(function () {
+            if (!isJifitiEnabledForPLP()) {
+                clearInterval(intervalId);
+                return;
+            }
             if (!window.OfferByPrice) {
                 return;
             }
             clearInterval(intervalId);
 
-            if (!isJifitiEnabledForPLP()) {
-                return;
-            }
             window.OfferByPrice.initKey($('#jifitiMerchantId').attr('value'));
             $('.product-grid')
                 .find('.product-tile')
