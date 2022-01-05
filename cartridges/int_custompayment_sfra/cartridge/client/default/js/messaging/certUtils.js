@@ -46,16 +46,19 @@ module.exports = {
             if (data && data.container && data.data && data.data.product) {
                 var product = data.data.product;
                 var $productContainer = data.container;
-                var unitPrice = product.price;
-                if (unitPrice.min) {
-                    unitPrice = unitPrice.min;
-                }
 
-                var price = product.selectedQuantity * unitPrice.sales.value;
+                var price = product.selectedQuantity * module.exports.getPrice(product.price);
                 var elem = $productContainer.find('.mount-jifiti-here');
 
                 module.exports.initCertMessage(elem.attr('id'), price, 'product');
             }
         });
+    },
+    getPrice: function (priceObj) {
+        var result = priceObj;
+        if (result.min) {
+            result = result.min;
+        }
+        return result.sales.value;
     }
 };
