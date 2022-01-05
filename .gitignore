@@ -1,7 +1,7 @@
 node_modules/
-cartridges/int_custompayment_sfra/cartridge/static/default/css/
-cartridges/int_custompayment_sfra/cartridge/static/default/js/
-cartridges/int_custompayment_sfra/cartridge/static/default/fonts/
+**/static/**/css/
+**/static/**/js/
+**/static/**/fonts/
 
 coverage/
 npm-debug.log
