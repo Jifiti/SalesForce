@@ -1,0 +1,7 @@
+<isif condition="${pdict.isJifitiEnabled && pdict.enableCertInCart}">
+    <div class="row">
+        <div class="col-8">
+            <div id="cart_message" class="mount-jifiti-here" data-totalprice="${pdict.totals.grandTotalValue}"></div>
+        </div>
+    </div>
+</isif>

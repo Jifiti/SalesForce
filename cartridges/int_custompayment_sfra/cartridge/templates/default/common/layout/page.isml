@@ -41,12 +41,19 @@
         <isinclude url="${URLUtils.url('ConsentTracking-Check')}"/>
 
         <iscomment> Hidden inputs for jifiti </iscomment>
-        <isif condition="${pdict.isJifitiEnabled}">
-            <input type="hidden" value="${pdict.isJifitiEnabled}" id="isJifitiEnabled" />
-            <isif condition="${pdict.isJifitiEnabled}">
+        <isset name="preferences" value="${require('*/cartridge/config/preferences')}" scope="page" />
+        <isif condition="${preferences.isJifitiEnabled}">
+            <input type="hidden" value="${preferences.isJifitiEnabled}" id="isJifitiEnabled" />
+            <isif condition="${preferences.isJifitiEnabled}">
                 <input type="hidden" value="${pdict.enableCertInPLP}" id="enableCertInPLP" />
             </isif>
-            <input type="hidden" value="${pdict.jifitiMerchantId}" id="jifitiMerchantId" />
+            <input type="hidden" value="${preferences.jifitiMerchantId}" id="jifitiMerchantId" />
+            <input type="hidden" value="${preferences.certMessagingText}" id="certMessagingText" />
+            <input type="hidden" value="${preferences.certMessagingTextStyle}" id="certMessagingTextStyle" />
+            <input type="hidden" value="${preferences.certMessagingLinkText}" id="certMessagingLinkText" />
+            <input type="hidden" value="${preferences.certMessagingLinkStyle}" id="certMessagingLinkStyle" />
+            <input type="hidden" value="${preferences.certMessagingLinkBehaviour}" id="certMessagingLinkBehaviour" />
+            <input type="hidden" value="${preferences.certMessagingLogoURL}" id="certMessagingLogoURL" />
         </isif>
     </body>
 </html>

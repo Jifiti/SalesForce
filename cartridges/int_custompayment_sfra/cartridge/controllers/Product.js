@@ -15,4 +15,13 @@ server.append('Show', server.middleware.https, function (req, res, next) {
 
     next();
 });
+
+server.append('ShowQuickView', function (req, res, next) {
+    res.setViewData({
+        isJifitiEnabled: preferences.isJifitiEnabled,
+        enableCertInPDP: preferences.enableCertInPDP
+    });
+
+    next();
+});
 module.exports = server.exports();

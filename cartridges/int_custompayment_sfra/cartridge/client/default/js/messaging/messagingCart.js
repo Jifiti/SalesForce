@@ -1,34 +1,28 @@
 'use strict';
 
-/**
- *
- * @param {string} id the id of the element to which attach jifiti
- * @param {number} price the price to pass to jifiti
- */
-function mountJifiti(id, price) {
-    if (!id || !price) {
-        return;
+var initCertMessage = require('./certUtils').initCertMessage;
+
+module.exports = {
+    init: function () {
+        if (!window.OfferByPrice) {
+            return;
+        }
+
+        window.OfferByPrice.initKey($('#jifitiMerchantId').attr('value'));
+
+        $('.mount-jifiti-here').each(function () {
+            var price = $(this).data('totalprice');
+
+            initCertMessage($(this).attr('id'), price, 'checkout');
+        });
+    },
+    updateCartTotals: function () {
+        $('body').on('cart:update cart:shippingMethodSelected promotion:success promotion:error', function (e, data) {
+            var cart = data ? data.cartModel || data.basket || data : null;
+            if (cart && cart.totals && 'grandTotalValue' in cart.totals) {
+                $('.totals .mount-jifiti-here').data('totalprice', cart.totals.grandTotalValue);
+                module.exports.init();
+            }
+        });
     }
-
-    window.OfferByPrice.init(id, {
-        price: price,
-        templateName: 'minFinancing',
-        flow: 'initiateFlow',
-        sourcepage: 'checkout'
-    });
-}
-
-module.exports.init = function () {
-    if (!window.OfferByPrice) {
-        return;
-    }
-
-    window.OfferByPrice.initKey($('#jifitiMerchantId').attr('value'));
-
-    $('.product-info .product-card-footer').each(function () {
-        var price = parseFloat($(this).find('.sales .value').attr('content'));
-        var elem = $(this).find('.mount-jifiti-here');
-
-        mountJifiti(elem.attr('id'), price);
-    });
 };
