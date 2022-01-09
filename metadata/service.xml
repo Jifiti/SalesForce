@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services xmlns="http://www.demandware.com/xml/impex/services/2014-09-26">
     <service-credential service-credential-id="credPayment.rest">
-        <url>https://apiuat2.jifiti.com</url>
+        <url>https://apiuat.jifiti.com</url>
         <user-id/>
         <password encrypted="true" encryption-type="common.export">ct9ccXR73pjiAJxulGoD3YyFbf6VnVWLhAFzFZ14Jyw=</password>
+    </service-credential>
+
+    <service-credential service-credential-id="credPaymentEU.rest">
+        <url>https://apiuat-eu.jifiti.com</url>
+        <user-id/>
+        <password encrypted="true" encryption-type="common.export">DGQ/ECpnJniXQ7Z2JDFKXsCrv1Ahef8fQi8+XiT8+Ww=</password>
     </service-credential>
 
     <service-profile service-profile-id="credPayment.rest">
@@ -12,6 +18,16 @@
         <rate-limit-calls>0</rate-limit-calls>
         <rate-limit-millis>0</rate-limit-millis>
         <cb-enabled>false</cb-enabled>
+        <cb-calls>0</cb-calls>
+        <cb-millis>0</cb-millis>
+    </service-profile>
+
+    <service-profile service-profile-id="credPaymentEU.rest">
+        <timeout-millis>30000</timeout-millis>
+        <rate-limit-enabled>false</rate-limit-enabled>
+        <rate-limit-calls>0</rate-limit-calls>
+        <rate-limit-millis>0</rate-limit-millis>
+        <cb-enabled>true</cb-enabled>
         <cb-calls>0</cb-calls>
         <cb-millis>0</cb-millis>
     </service-profile>
@@ -25,6 +41,17 @@
         <mock-mode-enabled>false</mock-mode-enabled>
         <profile-id>credPayment.rest</profile-id>
         <credential-id>credPayment.rest</credential-id>
+    </service>
+
+    <service service-id="credPaymentEU.rest">
+        <service-type>HTTP</service-type>
+        <enabled>true</enabled>
+        <log-prefix>credpaymentEU</log-prefix>
+        <comm-log-enabled>false</comm-log-enabled>
+        <force-prd-enabled>false</force-prd-enabled>
+        <mock-mode-enabled>false</mock-mode-enabled>
+        <profile-id>credPaymentEU.rest</profile-id>
+        <credential-id>credPaymentEU.rest</credential-id>
     </service>
 
 </services>
