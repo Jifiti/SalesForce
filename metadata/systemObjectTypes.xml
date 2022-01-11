@@ -229,6 +229,11 @@
             </attribute-definition>
             <attribute-definition attribute-id="bnplFlow">
                 <display-name xml:lang="x-default">Flow</display-name>
+                <description xml:lang="x-default">what happens when the link is clicked.&#13;
+it has three options:&#13;
+`Prequal` =&gt; Starts the soft credit check with the InitiateFlow API request, so that the referenceId can be used later on at checkout for a shorter application process.&#13;
+`ContinueShopping` =&gt; Displays consumer financing information page followed by call to action button to continue shopping.&#13;
+`CreateAccount` =&gt; Full application flow, ending in creating an account.</description>
                 <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -238,11 +243,11 @@
                         <value>Prequal</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">ContinueShopping</display>
+                        <display xml:lang="x-default">Continue Shopping</display>
                         <value>ContinueShopping</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">CreateAccount</display>
+                        <display xml:lang="x-default">Create Account</display>
                         <value>CreateAccount</value>
                     </value-definition>
                 </value-definitions>
@@ -263,15 +268,15 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <value-definitions>
                     <value-definition default="true">
-                        <display xml:lang="x-default">popup</display>
+                        <display xml:lang="x-default">Popup</display>
                         <value>0</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">newtab</display>
+                        <display xml:lang="x-default">New Tab</display>
                         <value>1</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">sametab</display>
+                        <display xml:lang="x-default">Same Tab</display>
                         <value>2</value>
                     </value-definition>
                 </value-definitions>
@@ -325,15 +330,15 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <value-definitions>
                     <value-definition default="true">
-                        <display xml:lang="x-default">standard</display>
+                        <display xml:lang="x-default">Standard</display>
                         <value>standard</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">minFinancing</display>
+                        <display xml:lang="x-default">Min Financing</display>
                         <value>minFinancing</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">minFinancingWithLogo</display>
+                        <display xml:lang="x-default">Min Financing With Logo</display>
                         <value>minFinancingWithLogo</value>
                     </value-definition>
                 </value-definitions>
@@ -356,7 +361,23 @@
                 <min-length>0</min-length>
                 <default-value>{}</default-value>
             </attribute-definition>
-
+            <attribute-definition attribute-id="JifitiServiceLocation">
+                <display-name xml:lang="x-default">Jifiti Service Location</display-name>
+                <description xml:lang="x-default">This custom Attribute used to decide the service that will be used</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">US</display>
+                        <value>credPayment.rest</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">EU</display>
+                        <value>credPaymentEU.rest</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="jifitiPayment">
@@ -376,6 +397,7 @@
                 <attribute attribute-id="jifitiPurchaseApi"/>
                 <attribute attribute-id="jifitiinitiateFlowApi"/>
                 <attribute attribute-id="isJifitiEnabled"/>
+                <attribute attribute-id="JifitiServiceLocation"/>
             </attribute-group>
             <attribute-group group-id="BNPL Promotional widget">
                 <display-name xml:lang="x-default">BNPL Promotional widget</display-name>

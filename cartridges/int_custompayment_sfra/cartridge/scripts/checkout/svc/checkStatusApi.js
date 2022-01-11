@@ -12,8 +12,13 @@ var Site = require('dw/system/Site');
 * @returns {dw.svc.Service} - cred payment Service
 * */
 function sendCheckStatusRequest() {
+    var Location = Site.current.getCustomPreferenceValue('JifitiServiceLocation').value;
+    var serviceName = 'credPayment.rest';
+    if (!empty(Location)) {
+        serviceName = Location;
+    }
     var token = Site.current.getCustomPreferenceValue('credPaymentToken');
-    var service = LocalServiceRegistry.createService('credPayment.rest', {
+    var service = LocalServiceRegistry.createService(serviceName, {
         createRequest: function (svc, params) {
             svc = svc.setRequestMethod('Get');
             svc.setURL(StringUtils.format('{0}/{1}', svc.URL, params.URL));
