@@ -7,10 +7,10 @@ var preferences = require('*/cartridge/config/preferences');
 
 server.append('Show', server.middleware.https, function (req, res, next) {
     res.setViewData({
-        jifitiWidgetLibraryURL: preferences.jifitiWidgetLibraryURL,
-        isJifitiEnabled: preferences.isJifitiEnabled,
-        jifitiMerchantId: preferences.jifitiMerchantId,
-        enableCertInCart: preferences.enableCertInCart
+        bnplWidgetLibraryURL: preferences.bnplWidgetLibraryURL,
+        bnplIsEnabled: preferences.bnplIsEnabled,
+        bnplAuthToken: preferences.bnplAuthToken,
+        bnplEnableInCart: preferences.bnplEnableInCart
     });
 
     next();

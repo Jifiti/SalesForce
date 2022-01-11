@@ -42,18 +42,25 @@
 
         <iscomment> Hidden inputs for jifiti </iscomment>
         <isset name="preferences" value="${require('*/cartridge/config/preferences')}" scope="page" />
-        <isif condition="${preferences.isJifitiEnabled}">
-            <input type="hidden" value="${preferences.isJifitiEnabled}" id="isJifitiEnabled" />
-            <isif condition="${preferences.isJifitiEnabled}">
-                <input type="hidden" value="${pdict.enableCertInPLP}" id="enableCertInPLP" />
-            </isif>
-            <input type="hidden" value="${preferences.jifitiMerchantId}" id="jifitiMerchantId" />
-            <input type="hidden" value="${preferences.certMessagingText}" id="certMessagingText" />
-            <input type="hidden" value="${preferences.certMessagingTextStyle}" id="certMessagingTextStyle" />
-            <input type="hidden" value="${preferences.certMessagingLinkText}" id="certMessagingLinkText" />
-            <input type="hidden" value="${preferences.certMessagingLinkStyle}" id="certMessagingLinkStyle" />
-            <input type="hidden" value="${preferences.certMessagingLinkBehaviour}" id="certMessagingLinkBehaviour" />
-            <input type="hidden" value="${preferences.certMessagingLogoURL}" id="certMessagingLogoURL" />
+        <isif condition="${preferences.bnplIsEnabled}">
+            <input type="hidden" value="${preferences.bnplIsEnabled}" id="bnplIsEnabled" />
+            <input type="hidden" value="${preferences.bnplAuthToken}" id="bnplAuthToken" />
+            <input type="hidden" value="${pdict.bnplEnableInPDP}" id="bnplEnableInPDP" />
+            <input type="hidden" value="${pdict.bnplEnableInPLP}" id="bnplEnableInPLP" />
+            <input type="hidden" value="${pdict.bnplEnableInCart}" id="bnplEnableInCart" />
+            <input type="hidden" value="${preferences.bnplContainerStyle}" id="bnplContainerStyle" />
+            <input type="hidden" value="${preferences.bnplText}" id="bnplText" />
+            <input type="hidden" value="${preferences.bnplTextStyle}" id="bnplTextStyle" />
+            <input type="hidden" value="${preferences.bnplLinkText}" id="bnplLinkText" />
+            <input type="hidden" value="${preferences.bnplLinkStyle}" id="bnplLinkStyle" />
+            <input type="hidden" value="${preferences.bnplLinkBehaviour}" id="bnplLinkBehaviour" />
+            <input type="hidden" value="${preferences.bnplLinkHref}" id="bnplLinkHref" />
+            <input type="hidden" value="${preferences.bnplCurrencySymbol}" id="bnplCurrencySymbol" />
+            <input type="hidden" value="${preferences.bnplLogoURL}" id="bnplLogoURL" />
+
+            <input type="hidden" value="${preferences.bnplOfferCategory}" id="bnplOfferCategory" />
+            <input type="hidden" value="${preferences.bnplTemplateName}" id="bnplTemplateName" />
+            <input type="hidden" value="${preferences.bnplFlow}" id="bnplFlow" />
         </isif>
     </body>
 </html>

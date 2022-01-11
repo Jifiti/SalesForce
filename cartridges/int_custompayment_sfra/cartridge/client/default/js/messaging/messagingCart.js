@@ -8,12 +8,12 @@ module.exports = {
             return;
         }
 
-        window.OfferByPrice.initKey($('#jifitiMerchantId').attr('value'));
+        window.OfferByPrice.initKey($('#bnplAuthToken').attr('value'));
 
         $('.mount-jifiti-here').each(function () {
             var price = $(this).data('totalprice');
 
-            initCertMessage($(this).attr('id'), price, 'checkout');
+            initCertMessage($(this).attr('id'), price, 'Checkout');
         });
     },
     updateCartTotals: function () {

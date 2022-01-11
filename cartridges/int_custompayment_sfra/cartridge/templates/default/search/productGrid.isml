@@ -1,8 +1,8 @@
 <isscript>
     var assets = require('*/cartridge/scripts/assets');
 
-    if (pdict.isJifitiEnabled && pdict.enableCertInPLP) {
-        assets.addJs(pdict.jifitiWidgetLibraryURL);
+    if (pdict.bnplIsEnabled && pdict.bnplEnableInPLP) {
+        assets.addJs(pdict.bnplWidgetLibraryURL);
     }
 </isscript>
 

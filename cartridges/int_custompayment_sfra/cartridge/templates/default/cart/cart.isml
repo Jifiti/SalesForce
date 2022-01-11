@@ -3,8 +3,8 @@
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addCss('/css/cart.css');
 
-        if (pdict.isJifitiEnabled && pdict.enableCertInCart) {
-            assets.addJs(pdict.jifitiWidgetLibraryURL);
+        if (pdict.bnplIsEnabled && pdict.bnplEnableInCart) {
+            assets.addJs(pdict.bnplWidgetLibraryURL);
             assets.addJs('/js/messagingCart.js');
         }
     </isscript>

@@ -5,8 +5,8 @@
         assets.addJs('/js/productDetail.js');
         assets.addCss('/css/product/detail.css');
 
-        if (pdict.isJifitiEnabled && pdict.enableCertInPDP) {
-            assets.addJs(pdict.jifitiWidgetLibraryURL);
+        if (pdict.bnplIsEnabled && pdict.bnplEnableInPDP) {
+            assets.addJs(pdict.bnplWidgetLibraryURL);
             assets.addJs('/js/messagingPDP.js');
         }
     </isscript>
@@ -83,7 +83,7 @@
                         <isinclude template="product/components/pricing/main" />
                     </div>
 
-                    <isif condition="${pdict.isJifitiEnabled && pdict.enableCertInPDP}">
+                    <isif condition="${pdict.bnplIsEnabled && pdict.bnplEnableInPDP}">
                         <div id="OfferByPrice" class="mount-jifiti-here"></div>
                     </isif>
 

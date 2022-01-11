@@ -6,10 +6,10 @@ var certUtils = require('./certUtils');
  * Where jifiti is enabled and if it also enabled in PLP
  * @returns {boolean} is jifiti enabled
  */
-function isJifitiEnabledForPLP() {
+function isEnabledForPLP() {
     return (
-        $('input#isJifitiEnabled').val() === 'true' &&
-        $('input#enableCertInPLP').val() === 'true'
+        $('input#bnplIsEnabled').val() === 'true' &&
+        $('input#bnplEnableInPLP').val() === 'true'
     );
 }
 
@@ -23,7 +23,7 @@ function mountJifiti(elem) {
 
         if (price) {
             var id = $(elem).find('.mount-jifiti-here').attr('id');
-            certUtils.initCertMessage(id, price);
+            certUtils.initCertMessage(id, price, 'PIP');
         }
     } catch (e) {
         console.log('mm', e); // eslint-disable-line no-console
@@ -57,7 +57,7 @@ function mountCertInQuickView() {
             var price = parseFloat(priceElem.find('.sales .value').attr('content'));
             var elem = $(this).find('.mount-jifiti-here');
 
-            certUtils.initCertMessage(elem.attr('id'), price);
+            certUtils.initCertMessage(elem.attr('id'), price, 'PIP');
         });
     });
 }
@@ -65,7 +65,7 @@ function mountCertInQuickView() {
 module.exports.init = function () {
     if (!window.OfferByPrice) {
         var intervalId = setInterval(function () {
-            if (!isJifitiEnabledForPLP()) {
+            if (!isEnabledForPLP()) {
                 clearInterval(intervalId);
                 return;
             }
@@ -74,7 +74,7 @@ module.exports.init = function () {
             }
             clearInterval(intervalId);
 
-            window.OfferByPrice.initKey($('#jifitiMerchantId').attr('value'));
+            window.OfferByPrice.initKey($('#bnplAuthToken').attr('value'));
             $('.product-grid')
                 .find('.product-tile')
                 .each(function () {
@@ -82,11 +82,11 @@ module.exports.init = function () {
                 });
         }, 500);
     } else {
-        if (!isJifitiEnabledForPLP()) {
+        if (!isEnabledForPLP()) {
             return;
         }
 
-        window.OfferByPrice.initKey($('#jifitiMerchantId').attr('value'));
+        window.OfferByPrice.initKey($('#bnplAuthToken').attr('value'));
 
         $('.product-grid')
             .find('.product-tile')
@@ -99,7 +99,7 @@ module.exports.init = function () {
 };
 
 module.exports.mountJifiti = function () {
-    if (!isJifitiEnabledForPLP()) {
+    if (!isEnabledForPLP()) {
         return;
     }
 
@@ -111,7 +111,7 @@ module.exports.mountJifiti = function () {
 };
 
 module.exports.unmountJifiti = function () {
-    if (!isJifitiEnabledForPLP()) {
+    if (!isEnabledForPLP()) {
         return;
     }
 
