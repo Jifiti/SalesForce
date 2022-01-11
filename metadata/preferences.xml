@@ -19,9 +19,10 @@
                 <value>OTLInstore</value>
                 <value>OTLOnline</value>
                 <value>_3xCB</value>
+                <value>SplitPayments</value>
             </preference>
             <preference preference-id="jifitisourcePageType">Checkout</preference>
-            <preference preference-id="jifitistoreId">Tel Aviv</preference>
+            <preference preference-id="jifitistoreId">SFCC Location</preference>
             <preference preference-id="jifitiwindowBehavior">SameTab</preference>
             <preference preference-id="jifitipaymentTransactionType">Capture</preference>
             <preference preference-id="jifiticheckAccountStatusApi">applications/v2/CheckAccountStatus</preference>
