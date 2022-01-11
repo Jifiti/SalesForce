@@ -8,38 +8,68 @@ module.exports = {
 
         var config = {
             price: price,
-            link_href: 'https://bjs.citizensone.com/?continueShopping=true',
-            sourcepage: sourcepage || 'product'
+            sourcepage: sourcepage || 'PIP'
         };
 
-        if ($('#certMessagingText').attr('value')) {
-            config.text = $('#certMessagingText').attr('value');
-        } else if ($('#certMessagingLogoURL').attr('value')) {
-            config.templateName = 'minFinancingWithLogo';
-            config.logo = $('#certMessagingLogoURL').attr('value');
+        if (sourcepage) {
+            config.sourcepage = sourcepage;
+        }
+
+        if ($('#bnplLinkHref').attr('value')) {
+            config.link_href = $('#bnplLinkHref').attr('value');
+        }
+
+        if ($('#bnplCurrencySymbol').attr('value')) {
+            config.currency = $('#bnplCurrencySymbol').attr('value');
+        }
+
+        if ($('#bnplLogoURL').attr('value')) {
+            config.logo = $('#bnplLogoURL').attr('value');
+        }
+
+        if ($('#bnplLinkBehaviour').attr('value')) {
+            config.link_behavior = Number($('#bnplLinkBehaviour').attr('value'));
+        }
+
+        if ($('#bnplContainerStyle').attr('value') !== '{}') {
+            config.container_style = JSON.parse($('#bnplContainerStyle').attr('value'));
+        }
+
+        if ($('#bnplTemplateName').attr('value') === 'standard') {
+            config.text = $('#bnplText').attr('value');
+
+            if ($('#bnplTextStyle').attr('value') !== '{}') {
+                config.text_style = JSON.parse($('#bnplTextStyle').attr('value'));
+            }
+
+            if ($('#bnplLinkText').attr('value')) {
+                config.link_text = $('#bnplLinkText').attr('value');
+            }
+
+            if ($('#bnplLinkStyle').attr('value') !== '{}') {
+                config.link_style = JSON.parse($('#bnplLinkStyle').attr('value'));
+            }
         } else {
-            config.templateName = 'minFinancing';
+            config.templateName = $('#bnplTemplateName').attr('value');
         }
 
-        window.OfferByPrice.init(id, config);
-
-        if ($('#certMessagingTextStyle').attr('value') !== '{}') {
-            window.OfferByPrice.setTextStyle(id, JSON.parse($('#certMessagingTextStyle').attr('value')));
+        // flow affect link_href, link_behavior and link_text. It should be last
+        // to make sure it we remove them.
+        if ($('#bnplFlow').attr('value')) {
+            config.flow = $('#bnplFlow').attr('value');
+            // delete config.link_text;
+            delete config.link_href;
+            delete config.link_behavior;
         }
 
-        if ($('#certMessagingLinkStyle').attr('value') !== '{}') {
-            window.OfferByPrice.setLinkStyle(id, JSON.parse($('#certMessagingLinkStyle').attr('value')));
-        }
+        console.log('config', config)
+        window.config = config;
 
-        if ($('#certMessagingLinkText').attr('value')) {
-            window.OfferByPrice.setLinkText(id, $('#certMessagingLinkText').attr('value'));
+        if ($('#bnplOfferCategory').attr('value')) {
+            window.OfferByPrice.init(id, config, $('#bnplOfferCategory').attr('value'));
+        } else {
+            window.OfferByPrice.init(id, config);
         }
-
-        if ($('#certMessagingLinkBehaviour').attr('value')) {
-            window.OfferByPrice.setLinkBehavior(id, Number($('#certMessagingLinkBehaviour').attr('value')));
-        }
-
-        $('#' + id + ' .offer-text p').css('color', '');
     },
     refreshCertMessage: function () {
         $('body').on('product:afterAttributeSelect', function (e, data) {

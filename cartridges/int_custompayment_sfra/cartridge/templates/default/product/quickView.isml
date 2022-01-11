@@ -65,7 +65,7 @@
                     </isif>
                 </isif>
 
-                <isif condition="${pdict.isJifitiEnabled && pdict.enableCertInPDP}">
+                <isif condition="${pdict.bnplIsEnabled && pdict.bnplEnableInPDP}">
                     <div class="row">
                         <div class="col-8">
                             <div id="quick_view_message" class="mount-jifiti-here"></div>

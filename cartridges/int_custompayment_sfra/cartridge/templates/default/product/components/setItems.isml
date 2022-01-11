@@ -107,7 +107,7 @@
                                 </div>
                             </div>
 
-                            <isif condition="${pdict.isJifitiEnabled && pdict.enableCertInPDP}">
+                            <isif condition="${pdict.bnplIsEnabled && pdict.bnplEnableInPDP}">
                                 <div class="row">
                                     <div class="col-12">
                                         <div id="product_${loopState.count}" class="mount-jifiti-here"></div>

@@ -7,10 +7,10 @@ var preferences = require('*/cartridge/config/preferences');
 
 server.append('Show', server.middleware.https, function (req, res, next) {
     res.setViewData({
-        jifitiWidgetLibraryURL: preferences.jifitiWidgetLibraryURL,
-        isJifitiEnabled: preferences.isJifitiEnabled,
-        jifitiMerchantId: preferences.jifitiMerchantId,
-        enableCertInPDP: preferences.enableCertInPDP
+        bnplWidgetLibraryURL: preferences.bnplWidgetLibraryURL,
+        bnplIsEnabled: preferences.bnplIsEnabled,
+        bnplAuthToken: preferences.bnplAuthToken,
+        bnplEnableInPDP: preferences.bnplEnableInPDP
     });
 
     next();
@@ -18,8 +18,8 @@ server.append('Show', server.middleware.https, function (req, res, next) {
 
 server.append('ShowQuickView', function (req, res, next) {
     res.setViewData({
-        isJifitiEnabled: preferences.isJifitiEnabled,
-        enableCertInPDP: preferences.enableCertInPDP
+        bnplIsEnabled: preferences.bnplIsEnabled,
+        bnplEnableInPDP: preferences.bnplEnableInPDP
     });
 
     next();

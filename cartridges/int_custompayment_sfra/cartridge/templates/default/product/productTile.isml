@@ -16,7 +16,7 @@
         </isif>
 
         <isset name="preferences" value="${require('*/cartridge/config/preferences')}" scope="page" />
-        <isif condition="${preferences.isJifitiEnabled && preferences.enableCertInPLP}">
+        <isif condition="${preferences.bnplIsEnabled && preferences.bnplEnableInPLP}">
             <div id="__lineitem_${pdict.jifitiId}" class="mount-jifiti-here"></div>
         </isif>
 

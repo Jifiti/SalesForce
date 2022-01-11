@@ -28,13 +28,20 @@
             <preference preference-id="jifitiinitiateFlowApi">applications/v2/InitiateFlow</preference>
             <preference preference-id="jifitiPurchaseApi">purchases/v2/Authorize</preference>
             <preference preference-id="isJifitiEnabled">true</preference>
-            <preference preference-id="enableCertInCart">true</preference>
-            <preference preference-id="enableCertInPDP">true</preference>
-            <preference preference-id="enableCertInPLP">true</preference>
-            <preference preference-id="jifitiWidgetLibraryURL">https://toolbox-dev.jifiti.com/Widgets/1.0.3/jifiti-widget.min.js</preference>
+            <preference preference-id="bnplAuthToken">w4te4r7tkejrt47wty687hrwrg4ht5rw</preference>
+            <preference preference-id="bnplContainerStyle">{"border":"1px solid red"}</preference>
+            <preference preference-id="bnplCurrency">@</preference>
+            <preference preference-id="bnplFlow">Prequal</preference>
+            <preference preference-id="bnplLinkBehaviour">1</preference>
+            <preference preference-id="bnplLinkHref">https://www.google.com/</preference>
+            <preference preference-id="bnplLinkStyle">{"color":"yellow"}</preference>
+            <preference preference-id="bnplLinkText">Check Eligibility22222</preference>
+            <preference preference-id="bnplTemplateName">minFinancing</preference>
+            <preference preference-id="bnplText">Only {pmt}/mo for {mons} months</preference>
+            <preference preference-id="bnplTextStyle">{"color":"purple"}</preference>
         </all-instances>
-        <development/>
-        <staging/>
-        <production/>
+        <development />
+        <staging />
+        <production />
     </custom-preferences>
 </preferences>

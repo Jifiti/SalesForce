@@ -181,35 +181,182 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
-            <attribute-definition attribute-id="enableCertInPDP">
-                <display-name xml:lang="x-default">enableCertInPDP</display-name>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <default-value>false</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="enableCertInPLP">
-                <display-name xml:lang="x-default">enableCertInPLP</display-name>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <default-value>false</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="enableCertInCart">
-                <display-name xml:lang="x-default">enableCertInCart</display-name>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <default-value>false</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="jifitiWidgetLibraryURL">
-                <display-name xml:lang="x-default">jifitiWidgetLibraryURL</display-name>
-                <description xml:lang="x-default">link to jifiti-widget.min.js library</description>
+            <attribute-definition attribute-id="bnplAuthToken">
+                <display-name xml:lang="x-default">Auth Token</display-name>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="bnplContainerStyle">
+                <display-name xml:lang="x-default">Container Style</display-name>
+                <description xml:lang="x-default">Customize outer container style it should be a javaScript object containing the css attributes, ex: {backgroundColor: '#D0E5EE',textAlign: 'center',lineHeight: 'normal',padding: '0px'}</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>{}</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplCurrencySymbol">
+                <display-name xml:lang="x-default">The currency symbol to be used in the promo widget</display-name>
+                <description xml:lang="x-default">The currency symbol to be used in the promo widget</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>$</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplEnableInCart">
+                <display-name xml:lang="x-default">Enable bnpl in Cart Page</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplEnableInPDP">
+                <display-name xml:lang="x-default">Enable bnpl in Product Details Page</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplEnableInPLP">
+                <display-name xml:lang="x-default">Enable bnpl in Product Listing Page</display-name>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplFlow">
+                <display-name xml:lang="x-default">Flow</display-name>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">Prequal</display>
+                        <value>Prequal</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">ContinueShopping</display>
+                        <value>ContinueShopping</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">CreateAccount</display>
+                        <value>CreateAccount</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplIsEnabled">
+                <display-name xml:lang="x-default">Enabled</display-name>
+                <description xml:lang="x-default">Select Yes/No to activate/deactivate the promotion message widget</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>true</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplLinkBehaviour">
+                <display-name xml:lang="x-default">Link Behavior</display-name>
+                <description xml:lang="x-default">Determine the behavior of clicking on the link</description>
+                <type>enum-of-int</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">popup</display>
+                        <value>0</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">newtab</display>
+                        <value>1</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">sametab</display>
+                        <value>2</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplLinkHref">
+                <display-name xml:lang="x-default">Link href</display-name>
+                <description xml:lang="x-default">Widget link URL for the specified selector. This is the link that will open the application flow</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplLinkStyle">
+                <display-name xml:lang="x-default">Link Style</display-name>
+                <description xml:lang="x-default">Customize link style it should be a javaScript object contains css attributes</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>{}</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplLinkText">
+                <display-name xml:lang="x-default">Link Text</display-name>
+                <description xml:lang="x-default">Text displayed for the link. This is the link that will open the application flow, default: Check Eligibility</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplLogoURL">
+                <display-name xml:lang="x-default">Logo URL</display-name>
+                <description xml:lang="x-default">The URL of logo when using minFinancingWithLogo</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplOfferCategory">
+                <display-name xml:lang="x-default">Offer Category</display-name>
+                <description xml:lang="x-default">(optional) Represents the eligible offer category, if not provided, displays the default offer</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplTemplateName">
+                <display-name xml:lang="x-default">Template Name</display-name>
+                <description xml:lang="x-default">(optional) Displays a different template if the product price is below the threshold for financing</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition default="true">
+                        <display xml:lang="x-default">standard</display>
+                        <value>standard</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">minFinancing</display>
+                        <value>minFinancing</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">minFinancingWithLogo</display>
+                        <value>minFinancingWithLogo</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplText">
+                <display-name xml:lang="x-default">Promotion Message Text</display-name>
+                <description xml:lang="x-default">Text to be display, should include the following placeholders: {pmt} - payment amount, {mons} - number of months</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>Only {pmt}/mo for {mons} months</default-value>
+            </attribute-definition>
+            <attribute-definition attribute-id="bnplTextStyle">
+                <display-name xml:lang="x-default">Text Style</display-name>
+                <description xml:lang="x-default">Customize text style it should be a javaScript object containing css attributes</description>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <default-value>{}</default-value>
+            </attribute-definition>
+
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="jifitiPayment">
@@ -230,12 +377,25 @@
                 <attribute attribute-id="jifitiinitiateFlowApi"/>
                 <attribute attribute-id="isJifitiEnabled"/>
             </attribute-group>
-            <attribute-group group-id="certMessaging">
-                <display-name xml:lang="x-default">certMessaging</display-name>
-                <attribute attribute-id="jifitiWidgetLibraryURL"/>
-                <attribute attribute-id="enableCertInPDP"/>
-                <attribute attribute-id="enableCertInPLP"/>
-                <attribute attribute-id="enableCertInCart"/>
+            <attribute-group group-id="BNPL Promotional widget">
+                <display-name xml:lang="x-default">BNPL Promotional widget</display-name>
+                <attribute attribute-id="bnplIsEnabled"/>
+                <attribute attribute-id="bnplAuthToken"/>
+                <attribute attribute-id="bnplEnableInPDP"/>
+                <attribute attribute-id="bnplEnableInPLP"/>
+                <attribute attribute-id="bnplEnableInCart"/>
+                <attribute attribute-id="bnplContainerStyle"/>
+                <attribute attribute-id="bnplText"/>
+                <attribute attribute-id="bnplTextStyle"/>
+                <attribute attribute-id="bnplLinkText"/>
+                <attribute attribute-id="bnplLinkStyle"/>
+                <attribute attribute-id="bnplLinkBehaviour"/>
+                <attribute attribute-id="bnplLinkHref"/>
+                <attribute attribute-id="bnplCurrencySymbol"/>
+                <attribute attribute-id="bnplLogoURL"/>
+                <attribute attribute-id="bnplOfferCategory"/>
+                <attribute attribute-id="bnplTemplateName"/>
+                <attribute attribute-id="bnplFlow"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
