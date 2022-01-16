@@ -53,15 +53,6 @@ module.exports = {
             config.templateName = $('#bnplTemplateName').attr('value');
         }
 
-        // flow affect link_href, link_behavior and link_text. It should be last
-        // to make sure it we remove them.
-        if ($('#bnplFlow').attr('value')) {
-            config.flow = $('#bnplFlow').attr('value');
-            // delete config.link_text;
-            delete config.link_href;
-            delete config.link_behavior;
-        }
-
         console.log('config', config)
         window.config = config;
 
