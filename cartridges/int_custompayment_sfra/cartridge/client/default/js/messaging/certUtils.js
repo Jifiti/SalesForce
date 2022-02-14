@@ -35,6 +35,10 @@ module.exports = {
             config.container_style = JSON.parse($('#bnplContainerStyle').attr('value'));
         }
 
+        if ($('#bnplFlow').attr('value')) {
+            config.flow = $('#bnplFlow').attr('value');
+        }
+
         if ($('#bnplTemplateName').attr('value') === 'standard') {
             config.text = $('#bnplText').attr('value');
 
@@ -53,7 +57,6 @@ module.exports = {
             config.templateName = $('#bnplTemplateName').attr('value');
         }
 
-        console.log('config', config)
         window.config = config;
 
         if ($('#bnplOfferCategory').attr('value')) {
