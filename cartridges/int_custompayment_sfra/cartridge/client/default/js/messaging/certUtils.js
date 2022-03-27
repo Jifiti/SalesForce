@@ -23,10 +23,6 @@ module.exports = {
             config.currency = $('#bnplCurrencySymbol').attr('value');
         }
 
-        if ($('#bnplLogoURL').attr('value')) {
-            config.logo = $('#bnplLogoURL').attr('value');
-        }
-
         if ($('#bnplLinkBehaviour').attr('value')) {
             config.link_behavior = Number($('#bnplLinkBehaviour').attr('value'));
         }

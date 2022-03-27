@@ -41,7 +41,6 @@ base.bnplLinkStyle = 'bnplLinkStyle' in customPreferences ? customPreferences.bn
 base.bnplLinkBehaviour = 'bnplLinkBehaviour' in customPreferences ? customPreferences.bnplLinkBehaviour.value : 0;
 base.bnplLinkHref = 'bnplLinkHref' in customPreferences ? customPreferences.bnplLinkHref : '';
 base.bnplCurrencySymbol = 'bnplCurrencySymbol' in customPreferences ? customPreferences.bnplCurrencySymbol : '';
-base.bnplLogoURL = 'bnplLogoURL' in customPreferences ? customPreferences.bnplLogoURL : '';
 
 base.bnplOfferCategory = 'bnplOfferCategory' in customPreferences ? customPreferences.bnplOfferCategory : '';
 base.bnplTemplateName = 'bnplTemplateName' in customPreferences ? customPreferences.bnplTemplateName.value : '';

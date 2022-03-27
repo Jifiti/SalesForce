@@ -56,8 +56,6 @@
             <input type="hidden" value="${preferences.bnplLinkBehaviour}" id="bnplLinkBehaviour" />
             <input type="hidden" value="${preferences.bnplLinkHref}" id="bnplLinkHref" />
             <input type="hidden" value="${preferences.bnplCurrencySymbol}" id="bnplCurrencySymbol" />
-            <input type="hidden" value="${preferences.bnplLogoURL}" id="bnplLogoURL" />
-
             <input type="hidden" value="${preferences.bnplOfferCategory}" id="bnplOfferCategory" />
             <input type="hidden" value="${preferences.bnplTemplateName}" id="bnplTemplateName" />
             <input type="hidden" value="${preferences.bnplFlow}" id="bnplFlow" />
