@@ -287,7 +287,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="bnplLinkStyle">
                 <display-name xml:lang="x-default">Link Style</display-name>
-                <description xml:lang="x-default">Customize link style (Font color, size, span, spacing, etc.)</description>
+                <description xml:lang="x-default">Customize link style (Font color, size, span, spacing, etc.). This field should be filled when the selected template is Standard</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -296,7 +296,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="bnplLinkText">
                 <display-name xml:lang="x-default">Link Text</display-name>
-                <description xml:lang="x-default">Text displayed for the link. This is the link that will open the application flow.</description>
+                <description xml:lang="x-default">Text displayed for the link. This is the link that will open the application flow. This field should be filled when the selected template is Standard</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -333,7 +333,7 @@
                 </value-definitions>
             </attribute-definition>
             <attribute-definition attribute-id="bnplText">
-                <display-name xml:lang="x-default">Promotion Message Text</display-name>
+                <display-name xml:lang="x-default">Message Text</display-name>
                 <description xml:lang="x-default">Text to be displayed, supports the following placeholders: {pmt } for the payment amount and {mons} for the financing period.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
