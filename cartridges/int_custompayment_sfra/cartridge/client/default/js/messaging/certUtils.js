@@ -1,5 +1,38 @@
 'use strict';
 
+/**
+ * Format JSON which contains single qoutes or key without qoutes
+ * @param {string} jsonToBeFormatted - Bad JSON which needs format
+ * @returns {string} Well formatted JSON
+ */
+function formatJson(jsonToBeFormatted) {
+    return jsonToBeFormatted
+        // Replace ":" with "@colon@" if it's between double-quotes
+        .replace(/:\s*"([^"]*)"/g, function (_match, p1) {
+            return ': "' + p1.replace(/:/g, '@colon@') + '"';
+        })
+
+        // Replace ":" with "@colon@" if it's between single-quotes
+        .replace(/:\s*'([^']*)'/g, function (_match, p1) {
+            return ': "' + p1.replace(/:/g, '@colon@') + '"';
+        })
+
+        // Add double-quotes around any tokens before the remaining ":"
+        .replace(/(['"])?(\w+)(['"])?\s*:/g, '"$2": ')
+
+        // Turn "@colon@" back into ":"
+        .replace(/@colon@/g, ':');
+}
+
+/**
+ * Parse any bad JSON string which contains single qoutes
+ * @param {string} jsonString - JSON string to be parsed
+ * @returns {Object} parsed json
+ */
+function jsonParser(jsonString) {
+    return JSON.parse(formatJson(jsonString));
+}
+
 module.exports = {
     initCertMessage: function (id, price, sourcepage) {
         if (!id || !price) {
@@ -28,7 +61,7 @@ module.exports = {
         }
 
         if ($('#bnplContainerStyle').attr('value') !== '{}') {
-            config.container_style = JSON.parse($('#bnplContainerStyle').attr('value'));
+            config.container_style = jsonParser($('#bnplContainerStyle').attr('value'));
         }
 
         if ($('#bnplFlow').attr('value')) {
@@ -39,7 +72,7 @@ module.exports = {
             config.text = $('#bnplText').attr('value');
 
             if ($('#bnplTextStyle').attr('value') !== '{}') {
-                config.text_style = JSON.parse($('#bnplTextStyle').attr('value'));
+                config.text_style = jsonParser($('#bnplTextStyle').attr('value'));
             }
 
             if ($('#bnplLinkText').attr('value')) {
@@ -47,7 +80,7 @@ module.exports = {
             }
 
             if ($('#bnplLinkStyle').attr('value') !== '{}') {
-                config.link_style = JSON.parse($('#bnplLinkStyle').attr('value'));
+                config.link_style = jsonParser($('#bnplLinkStyle').attr('value'));
             }
         } else {
             config.templateName = $('#bnplTemplateName').attr('value');
@@ -62,7 +95,7 @@ module.exports = {
         }
     },
     refreshCertMessage: function () {
-        $('body').on('product:afterAttributeSelect', function (e, data) {
+        $('body').on('product:afterAttributeSelect', function (_e, data) {
             if (data && data.container && data.data && data.data.product) {
                 var product = data.data.product;
                 var $productContainer = data.container;
