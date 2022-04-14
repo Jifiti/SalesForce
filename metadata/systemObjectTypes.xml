@@ -392,20 +392,20 @@
                 <display-name xml:lang="x-default">BNPL Promotional widget</display-name>
                 <attribute attribute-id="bnplIsEnabled"/>
                 <attribute attribute-id="bnplAuthToken"/>
-                <attribute attribute-id="bnplTemplateName"/>
-                <attribute attribute-id="bnplFlow"/>
                 <attribute attribute-id="bnplEnableInPDP"/>
                 <attribute attribute-id="bnplEnableInPLP"/>
                 <attribute attribute-id="bnplEnableInCart"/>
                 <attribute attribute-id="bnplContainerStyle"/>
-                <attribute attribute-id="bnplText"/>
                 <attribute attribute-id="bnplTextStyle"/>
-                <attribute attribute-id="bnplLinkText"/>
                 <attribute attribute-id="bnplLinkStyle"/>
-                <attribute attribute-id="bnplLinkBehaviour"/>
-                <attribute attribute-id="bnplLinkHref"/>
+                <attribute attribute-id="bnplText"/>
                 <attribute attribute-id="bnplCurrencySymbol"/>
+                <attribute attribute-id="bnplLinkHref"/>
+                <attribute attribute-id="bnplLinkText"/>
+                <attribute attribute-id="bnplLinkBehaviour"/>
                 <attribute attribute-id="bnplOfferCategory"/>
+                <attribute attribute-id="bnplTemplateName"/>
+                <attribute attribute-id="bnplFlow"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
