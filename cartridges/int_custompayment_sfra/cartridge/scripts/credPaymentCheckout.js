@@ -76,6 +76,7 @@ function getPaymentRequest(order, paymentInstrument) {
     paymentReq.BillingAddress = billingAddressDetail;
     paymentReq.ShippingAddress = shippingAddressDetail;
     // Loyalty information
+    /* Commenting out Loyalty information as requested on JIRA EC-62.
     var customerLoyaltyDetail = {};
     customerLoyaltyDetail.LoyaltyNumber = customer.authenticated && customer.registered ? customer.profile.customerNo : '';
     customerLoyaltyDetail.LoyaltyStartDate = '';
@@ -83,7 +84,7 @@ function getPaymentRequest(order, paymentInstrument) {
     customerLoyaltyDetail.LoyaltyClassification = '';
     if ((customer.authenticated && customer.registered)) {
         paymentReq.CustomerLoyalty = customerLoyaltyDetail;
-    }
+    }*/
 
     paymentReq.RequestedAmount = ammount;
     paymentReq.Currency = currencyCode;
