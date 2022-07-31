@@ -181,6 +181,23 @@
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
+            <attribute-definition attribute-id="JifitiServiceLocation">
+                <display-name xml:lang="x-default">Jifiti Service Location</display-name>
+                <description xml:lang="x-default">This custom Attribute used to decide the service that will be used</description>
+                <type>enum-of-string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <value-definitions>
+                    <value-definition>
+                        <display xml:lang="x-default">US</display>
+                        <value>credPayment.rest</value>
+                    </value-definition>
+                    <value-definition>
+                        <display xml:lang="x-default">EU</display>
+                        <value>credPaymentEU.rest</value>
+                    </value-definition>
+                </value-definitions>
+            </attribute-definition>
             <attribute-definition attribute-id="bnplAuthToken">
                 <display-name xml:lang="x-default">Auth Token</display-name>
                 <type>string</type>
@@ -349,23 +366,6 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
                 <default-value>{}</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="JifitiServiceLocation">
-                <display-name xml:lang="x-default">Jifiti Service Location</display-name>
-                <description xml:lang="x-default">This custom Attribute used to decide the service that will be used</description>
-                <type>enum-of-string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <value-definitions>
-                    <value-definition>
-                        <display xml:lang="x-default">US</display>
-                        <value>credPayment.rest</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">EU</display>
-                        <value>credPaymentEU.rest</value>
-                    </value-definition>
-                </value-definitions>
             </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
