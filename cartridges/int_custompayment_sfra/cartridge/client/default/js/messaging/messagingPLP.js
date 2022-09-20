@@ -18,15 +18,11 @@ function isEnabledForPLP() {
  * @param {HTMLElement} elem is the element to attach a jifiti component to
  */
 function mountJifiti(elem) {
-    try {
-        var price = certUtils.getPrice($(elem).find('.tile-body').data('price'));
+    var price = certUtils.getPrice($(elem).find('.tile-body').data('price'));
 
-        if (price) {
-            var id = $(elem).find('.mount-jifiti-here').attr('id');
-            certUtils.initCertMessage(id, price, 'PIP');
-        }
-    } catch (e) {
-        console.log('mm', e); // eslint-disable-line no-console
+    if (price) {
+        var id = $(elem).find('.mount-jifiti-here').attr('id');
+        certUtils.initCertMessage(id, price, 'PIP');
     }
 }
 
@@ -45,7 +41,7 @@ function unmountJifiti(elem) {
 
 
 /**
- * Mount Cert messages onece quick view modal is ready
+ * Mount Cert messages once quick view modal is ready
  */
 function mountCertInQuickView() {
     $('body').on('quickview:ready', function () {
