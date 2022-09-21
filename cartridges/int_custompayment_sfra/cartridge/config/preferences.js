@@ -13,13 +13,13 @@ base.bnplWidgetLibraryURL = (function () {
     var Logger = require('dw/system/Logger');
 
     try {
-        var instance = 'https://toolbox-dev.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
+        var instance = 'https://toolbox-uat.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
         switch (System.getInstanceType()) {
             case System.PRODUCTION_SYSTEM:
                 instance = 'https://toolbox.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
                 break;
             case System.STAGING_SYSTEM:
-                instance = 'https://toolbox-dev.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
+                instance = 'https://toolbox-uat.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
                 break;
             default:
                 break;
