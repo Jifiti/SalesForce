@@ -7,10 +7,10 @@ var StringUtils = require('dw/util/StringUtils');
 var Site = require('dw/system/Site');
 
 /**
-* cred payment Send Cancel OR Refund Request
+* cred payment Send Cancel OR Refund OR Capture Request
 * @returns {dw.svc.Service} - cred payment Service
 * */
-function sendCancelOrRefundRequest() {
+function sendOrderRequest() {
     var Location = Site.current.getCustomPreferenceValue('JifitiServiceLocation').value;
     var serviceName = 'credPayment.rest';
     if (!empty(Location)) {
@@ -52,5 +52,5 @@ function sendCancelOrRefundRequest() {
 }
 
 module.exports = {
-    sendCancelOrRefundRequest: sendCancelOrRefundRequest
+    sendOrderRequest: sendOrderRequest
 };

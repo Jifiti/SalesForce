@@ -212,6 +212,13 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="jifitiCaptureApi">
+                <display-name xml:lang="x-default">CaptureApi</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="bnplAuthToken">
                 <display-name xml:lang="x-default">Auth Token</display-name>
                 <type>string</type>
@@ -403,6 +410,7 @@
                 <attribute attribute-id="JifitiServiceLocation"/>
                 <attribute attribute-id="jifitiCancelApi"/>
                 <attribute attribute-id="jifitiRefundApi"/>
+                <attribute attribute-id="jifitiCaptureApi"/>
             </attribute-group>
             <attribute-group group-id="BNPL Promotional widget">
                 <display-name xml:lang="x-default">BNPL Promotional widget</display-name>
@@ -441,12 +449,28 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="RemainderAuthId">
+                <display-name xml:lang="x-default">Remainder AuthId</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="CommitedAuthId">
+                <display-name xml:lang="x-default">Commited Auth Id</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
             <attribute-group group-id="JifitiPayment">
                 <display-name xml:lang="x-default">Jifiti Payment Attributes</display-name>
                 <attribute attribute-id="jifitiReferenceId"/>
                 <attribute attribute-id="orderToken"/>
+                <attribute attribute-id="RemainderAuthId"/>
+                <attribute attribute-id="CommitedAuthId"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
