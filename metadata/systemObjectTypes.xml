@@ -154,6 +154,13 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
+            <attribute-definition attribute-id="jifitiNotificationAPIURL">
+                <display-name xml:lang="x-default">NotificationAPIURL</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="jifitiPurchaseApi">
                 <display-name xml:lang="x-default">PurchaseApi</display-name>
                 <type>string</type>
@@ -387,6 +394,7 @@
                 <attribute attribute-id="jifitiinitiateFlowApi"/>
                 <attribute attribute-id="isJifitiEnabled"/>
                 <attribute attribute-id="JifitiServiceLocation"/>
+                <attribute attribute-id="jifitiNotificationAPIURL"/>
             </attribute-group>
             <attribute-group group-id="BNPL Promotional widget">
                 <display-name xml:lang="x-default">BNPL Promotional widget</display-name>

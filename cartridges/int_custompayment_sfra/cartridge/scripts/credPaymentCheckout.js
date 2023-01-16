@@ -30,6 +30,7 @@ function getPaymentRequest(order, paymentInstrument) {
     parameters.token = token;
     parameters.orderToken = order.getOrderToken();
     var callBackURL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('jifiticallBackURL'), parameters);
+    var notificationAPIURL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('jifitiNotificationAPIURL'), parameters);
     var customerEmail = order.getCustomerEmail();
     var customerdetail = {};
     var billingAddressDetail = {};
@@ -90,7 +91,7 @@ function getPaymentRequest(order, paymentInstrument) {
     paymentReq.Currency = currencyCode;
     paymentReq.SourcePageType = Site.current.getCustomPreferenceValue('jifitisourcePageType').value;
     paymentReq.CallbackURL = callBackURL;
-    paymentReq.NotificationAPIURL = '';
+    paymentReq.NotificationAPIURL = notificationAPIURL;
     var productTypesValues = Site.current.getCustomPreferenceValue('jifitiproductTypes');
     var productTypesList = new ArrayList(productTypesValues);
     var productTypes = productTypesList.toArray();

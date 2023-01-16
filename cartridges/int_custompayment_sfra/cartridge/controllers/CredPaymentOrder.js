@@ -80,14 +80,16 @@ server.get(
                 returningCustomer: false,
                 passwordForm: passwordForm,
                 reportingURLs: reportingURLs,
-                orderUUID: order.getUUID()
+                orderUUID: order.getUUID(),
+                isPending: req.querystring.isPending
             });
         } else {
             res.render('checkout/confirmation/confirmation', {
                 order: orderModel,
                 returningCustomer: true,
                 reportingURLs: reportingURLs,
-                orderUUID: order.getUUID()
+                orderUUID: order.getUUID(),
+                isPending: req.querystring.isPending
             });
         }
         req.session.raw.custom.orderID = req.querystring.ID; // eslint-disable-line no-param-reassign
