@@ -11,15 +11,17 @@ base.bnplAuthToken = 'bnplAuthToken' in customPreferences ? customPreferences.bn
 base.bnplWidgetLibraryURL = (function () {
     var System = require('dw/system/System');
     var Logger = require('dw/system/Logger');
+    var CustomObjectMgr = require('dw/object/CustomObjectMgr');
+    var lenderDetails = CustomObjectMgr.getCustomObject('lenderDetails', 'lenderDetails');
 
     try {
-        var instance = 'https://toolbox-uat.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
+        var instance = lenderDetails && lenderDetails.custom.JSWidgetUrl ? lenderDetails.custom.JSWidgetUrl : 'https://toolbox-uat.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
         switch (System.getInstanceType()) {
             case System.PRODUCTION_SYSTEM:
-                instance = 'https://toolbox.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
+                instance = lenderDetails && lenderDetails.custom.JSWidgetUrl ? lenderDetails.custom.JSWidgetUrl : 'https://toolbox.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
                 break;
             case System.STAGING_SYSTEM:
-                instance = 'https://toolbox-uat.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
+                instance = lenderDetails && lenderDetails.custom.JSWidgetUrl ? lenderDetails.custom.JSWidgetUrl : 'https://toolbox-uat.jifiti.com/Widgets/1.0.4/jifiti-widget.min.js';
                 break;
             default:
                 break;
