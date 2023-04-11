@@ -198,6 +198,13 @@
                     </value-definition>
                 </value-definitions>
             </attribute-definition>
+            <attribute-definition attribute-id="jifitigetLenderDetailsApi">
+                <display-name xml:lang="x-default">getLenderDetailsApi</display-name>
+                <type>string</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="bnplAuthToken">
                 <display-name xml:lang="x-default">Auth Token</display-name>
                 <type>string</type>
@@ -387,6 +394,7 @@
                 <attribute attribute-id="jifitiinitiateFlowApi"/>
                 <attribute attribute-id="isJifitiEnabled"/>
                 <attribute attribute-id="JifitiServiceLocation"/>
+		        <attribute attribute-id="jifitigetLenderDetailsApi"/>
             </attribute-group>
             <attribute-group group-id="BNPL Promotional widget">
                 <display-name xml:lang="x-default">BNPL Promotional widget</display-name>
