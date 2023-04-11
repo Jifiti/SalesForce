@@ -14,7 +14,6 @@ function proxyModel() {
         'dw/system/Transaction': require('../../dw/dw_system_Transaction'),
         'dw/system/Logger': require('../../dw/dw_system_Logger'),
         'dw/web/Resource': require('../../dw/dw_web_Resource'),
-        'dw/system/Site': require('../../dw/dw_system_Site'),
         'dw/order/BasketMgr': require('../../dw/dw_order_BasketMgr'),
         'dw/order/PaymentMgr': require('../../dw/dw_order_PaymentMgr'),
         'dw/system/HookMgr': require('../../dw/dw_system_HookMgr'),
