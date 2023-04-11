@@ -17,6 +17,7 @@ function getPaymentRequest(order, paymentInstrument) {
     var storeId = Site.current.getCustomPreferenceValue('jifitistoreId');
     var urlHelper = require('*/cartridge/scripts/helpers/urlHelpers');
     var ArrayList = require('dw/util/ArrayList');
+    var URLUtils = require('dw/web/URLUtils');
     var paymentReq = {};
     var ammount = paymentInstrument.paymentTransaction.amount.value;
     var currencyCode = order.getCurrencyCode();
@@ -29,7 +30,7 @@ function getPaymentRequest(order, paymentInstrument) {
     parameters.orderID = orderNo;
     parameters.token = token;
     parameters.orderToken = order.getOrderToken();
-    var callBackURL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('jifiticallBackURL'), parameters);
+    var callBackURL = urlHelper.appendQueryParams(URLUtils.http(Site.current.getCustomPreferenceValue('jifiticallBackURL')).toString(), parameters);
     var customerEmail = order.getCustomerEmail();
     var customerdetail = {};
     var billingAddressDetail = {};
