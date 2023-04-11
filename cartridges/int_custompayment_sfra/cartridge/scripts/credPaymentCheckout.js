@@ -17,6 +17,7 @@ function getPaymentRequest(order, paymentInstrument) {
     var storeId = Site.current.getCustomPreferenceValue('jifitistoreId');
     var urlHelper = require('*/cartridge/scripts/helpers/urlHelpers');
     var ArrayList = require('dw/util/ArrayList');
+    var URLUtils = require('dw/web/URLUtils');
     var paymentReq = {};
     var ammount = paymentInstrument.paymentTransaction.amount.value;
     var currencyCode = order.getCurrencyCode();
