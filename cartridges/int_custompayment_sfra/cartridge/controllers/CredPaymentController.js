@@ -93,7 +93,7 @@ server.get('CallBack', function (req, res, next) {
                     }
                     paymentError = true;
                 }
-            }  else if (status === 'PurchasePending') {
+            }  else if (status === 'ApplicationPending') {
                 res.redirect(URLUtils.url('CredPaymentOrder-Confirm', 'ID', order.orderNo, 'token', order.orderToken, 'isPending', true).toString());
                 return next();
             } else {
@@ -225,6 +225,13 @@ server.post('AccountStatusNotification', function (req, res, next) {
                     }
                     paymentError = true;
                 }
+            } else if (status === 'ApplicationPending') {
+                res.json({
+                    status: "Pending",
+                    orderID: order.orderNo,
+                    token: order.orderToken
+                });
+                return next();
             } else {
                 paymentError = true;
             }
