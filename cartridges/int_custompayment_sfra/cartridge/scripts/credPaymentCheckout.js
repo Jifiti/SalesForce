@@ -93,6 +93,7 @@ function getPaymentRequest(order, paymentInstrument) {
     paymentReq.SourcePageType = Site.current.getCustomPreferenceValue('jifitisourcePageType').value;
     paymentReq.CallbackURL = callBackURL;
     paymentReq.NotificationAPIURL = notificationAPIURL;
+    paymentReq.StartedFrom = 'Salesforce';
     var productTypesValues = Site.current.getCustomPreferenceValue('jifitiproductTypes');
     var productTypesList = new ArrayList(productTypesValues);
     var productTypes = productTypesList.toArray();
