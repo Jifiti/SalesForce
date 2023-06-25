@@ -31,7 +31,7 @@ function getPaymentRequest(order, paymentInstrument) {
     parameters.token = token;
     parameters.orderToken = order.getOrderToken();
     var callBackURL = urlHelper.appendQueryParams(URLUtils.http(Site.current.getCustomPreferenceValue('jifiticallBackURL')).toString(), parameters);
-    var notificationAPIURL = urlHelper.appendQueryParams(Site.current.getCustomPreferenceValue('jifitiNotificationAPIURL'), parameters);
+    var notificationAPIURL = urlHelper.appendQueryParams(URLUtils.http(Site.current.getCustomPreferenceValue('jifitiNotificationAPIURL')).toString(), parameters);
     var customerEmail = order.getCustomerEmail();
     var customerdetail = {};
     var billingAddressDetail = {};
